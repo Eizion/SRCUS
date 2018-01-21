@@ -7,7 +7,9 @@
 <title>Southeast Regional Credit Union Schools Web Portal</title>
 </head>
 <body>
-	<h1>Log In</h1>
+	
+	<h1>Southeast Regional Credit Union Schools Web Portal</h1>
+	<h3>Log In</h3>
     
     	<form name="loginForm" action="login" method="post">
 			<table>
