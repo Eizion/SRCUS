@@ -9,3 +9,6 @@ _Group_
 * Wale Akitan
 * Britney Lovett
 * Joe Vo
+
+Database Dump Updated 1-24-18
+https://www.dropbox.com/s/ky95gsv7vr3bzyd/srcus_master_2018-01-24.sql?dl=0
