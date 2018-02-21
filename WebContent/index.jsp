@@ -14,8 +14,8 @@
     	<form name="loginForm" action="login" method="post">
 			<table>
 				<tr>
-					<td><label>Username</label></td>
-					<td><input type="text" name="username" required /></td>
+					<td><label>Email</label></td>
+					<td><input type="text" name="email" required /></td>
 				</tr>
 				<tr>
 					<td><label>Password</label></td>

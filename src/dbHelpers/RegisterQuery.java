@@ -3,7 +3,7 @@ package dbHelpers;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+//import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import model.User;
@@ -30,17 +30,16 @@ public class RegisterQuery {
 	
 	public void doRegister(User user) {
 		
-		String query = "insert into user (username, password, fName, lName, email, role) values (?, ?, ?, ?, ?, ?)";
+		String query = "insert into user (email, password, fName, lName, role) values (?, ?, ?, ?, ?)";
 		
 		try {
 			PreparedStatement ps = connection.prepareStatement(query);
 			
-			ps.setString(1, user.getUsername());
+			ps.setString(1, user.getEmail());
 			ps.setString(2, user.getPassword());
 			ps.setString(3, user.getfName());
 			ps.setString(4, user.getlName());
-			ps.setString(5, user.getEmail());
-			ps.setString(6, user.getRole());
+			ps.setString(5, user.getRole());
 			
 			ps.executeUpdate();
 			

@@ -21,7 +21,7 @@ public class CheckUserQuery {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			this.connection = DriverManager.getConnection(url, uname, pwd);
 			
-			checkUserStatement = connection.prepareStatement("select * from user where username = ?");
+			checkUserStatement = connection.prepareStatement("select * from user where email = ?");
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -29,16 +29,16 @@ public class CheckUserQuery {
 		}
 	}
 	
-	public User checkUser(String userName) {
+	public User checkUser(String email) {
 
 		User user = null;
 		
 		try {
-			checkUserStatement.setString(1, userName);
+			checkUserStatement.setString(1, email);
 			ResultSet rs = checkUserStatement.executeQuery();
 			
 			if (rs.next()) {
-				user = new User(rs.getInt("id"), rs.getString("username"), rs.getString("password"), rs.getString("fName"), rs.getString("lName"), rs.getNString("email"), rs.getString("role"));
+				user = new User(rs.getInt("user_id"), rs.getString("email"), rs.getString("password"), rs.getString("fName"), rs.getString("lName"), rs.getString("role"));
 			}
 			
 		} catch (SQLException e) {

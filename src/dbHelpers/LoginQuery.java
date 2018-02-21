@@ -21,7 +21,7 @@ public class LoginQuery {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			this.connection = DriverManager.getConnection(url, uname, pwd);
 			
-			authenticateUserStatement = connection.prepareStatement("select * from user where username = ? and password = ?");
+			authenticateUserStatement = connection.prepareStatement("select * from user where email = ? and password = ?");
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -39,7 +39,7 @@ public class LoginQuery {
 			ResultSet rs = authenticateUserStatement.executeQuery();
 			
 			if (rs.next()) {
-				user = new User(rs.getInt("id"), rs.getString("username"), rs.getString("password"), rs.getString("fName"), rs.getString("lName"), rs.getNString("email"), rs.getString("role"));
+				user = new User(rs.getInt("user_id"), rs.getString("email"), rs.getString("password"), rs.getString("fName"), rs.getString("lName"), rs.getString("role"));
 			}
 			
 		} catch (SQLException e) {
