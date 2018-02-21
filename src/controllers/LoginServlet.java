@@ -65,14 +65,14 @@ public class LoginServlet extends HttpServlet {
 			request.setAttribute("errorMessage", errorMessage);
 			url="index.jsp";
 		} else {
-			String username = request.getParameter("username");
+			String email = request.getParameter("email");
 			String password = request.getParameter("password");
 			
 			Encryption encrypted = new Encryption();
 			String encryptedPassword = encrypted.encrypt(password);
 			
 			LoginQuery lq = new LoginQuery("srcus_master", "root", "root");
-			User user = lq.authenticateUser(username, encryptedPassword);
+			User user = lq.authenticateUser(email, encryptedPassword);
 			
 			if (user != null){
 				session.invalidate();
@@ -80,7 +80,7 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("user", user);
 				url="home.jsp";
 			} else {
-				String errorMessage = "Error: Unrecognized Username or Password <br>Login attempts remaining: "+(3-(loginAttempts));
+				String errorMessage = "Error: Unrecognized Email or Password <br>Login attempts remaining: "+(3-(loginAttempts));
 				request.setAttribute("errorMessage", errorMessage);
 				
 				session.setAttribute("loginAttempts", loginAttempts++);

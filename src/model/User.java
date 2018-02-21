@@ -2,12 +2,11 @@ package model;
 
 public class User {
 	
-	private int id;
-	private String username;
+	private int user_id;
+	private String email;
 	private String password;
 	private String fName;
 	private String lName;
-	private String email;
 	private String role;
 	
 	/**
@@ -23,9 +22,8 @@ public class User {
 	 * @param fName
 	 * @param lName
 	 */
-	public User(int id, String username, String password, String fName, String lName, String email, String role) {
-		this.id = id;
-		this.username = username;
+	public User(int user_id, String email, String password, String fName, String lName, String role) {
+		this.user_id = user_id;
 		this.password = password;
 		this.fName = fName;
 		this.lName = lName;
@@ -37,30 +35,30 @@ public class User {
 	 * @return the id
 	 */
 	public int getId() {
-		return id;
+		return user_id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
 	public void setId(int id) {
-		this.id = id;
+		this.user_id = id;
+	}
+	
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
 	}
 
 	/**
-	 * @return the username
+	 * @param email the email to set
 	 */
-	public String getUsername() {
-		return username;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-
-	/**
-	 * @param username the username to set
-	 */
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
+	
 	/**
 	 * @return the password
 	 */
@@ -101,20 +99,6 @@ public class User {
 	 */
 	public void setlName(String lName) {
 		this.lName = lName;
-	}
-	
-	/**
-	 * @return the email
-	 */
-	public String getEmail() {
-		return email;
-	}
-
-	/**
-	 * @param email the email to set
-	 */
-	public void setEmail(String email) {
-		this.email = email;
 	}
 	
 	/**

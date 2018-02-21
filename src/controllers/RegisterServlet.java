@@ -43,31 +43,29 @@ public class RegisterServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String userName = request.getParameter("user");
+		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String fName = request.getParameter("fname");
 		String lName = request.getParameter("lname");
-		String email = request.getParameter("email");
 		String role = request.getParameter("role");
 		
 		Encryption pwd = new Encryption();
 		String encryptedPass = pwd.encrypt(password);
 		
 		CheckUserQuery cu = new CheckUserQuery("srcus_master", "root", "root");
-		User user = cu.checkUser(userName);
+		User user = cu.checkUser(email);
 		
 		if (user != null){
-			String errorMessage = "Error: Username already exists. Try another one.";
+			String errorMessage = "Error: Email already exists. Try another one.";
 			request.setAttribute("errorMessage", errorMessage);
 			url = "registerUser.jsp";
 		} else {
 			User newUser = new User();
 			
-			newUser.setUsername(userName);
+			newUser.setEmail(email);
 			newUser.setPassword(encryptedPass);
 			newUser.setfName(fName);
 			newUser.setlName(lName);
-			newUser.setEmail(email);
 			newUser.setRole(role);
 			
 			RegisterQuery rq = new RegisterQuery("srcus_master", "root", "root");

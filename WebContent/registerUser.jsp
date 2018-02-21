@@ -12,13 +12,12 @@
 	
 	<h1>Account Registration</h1>
 		
-		<div class="form">
 	
 			<form name="registration" action="register" method="post">
     			<table>
-    				<tr>
-    					<td><label>Username:</label></td>
-     					<td><input type="text" name="user" required /></td>
+     				<tr>
+	    				<td><label>Email:</label></td>
+     					<td><input type="text" name="email" required/></td>
      				</tr>
      				<tr>
      					<td><label>Password:</label></td>
@@ -33,11 +32,7 @@
      					<td><input type="text" name="lname" required/></td>
      				</tr>
      				<tr>
-	    				<td><label>Email:</label></td>
-     					<td><input type="text" name="email" required/></td>
-     				</tr>
-     				<tr>
-	    				<td><label>Roles:</label></td>
+	    				<td><label>Role:</label></td>
      					<td><select name="role" required>
      							<option value="">-----</option>
      							<option value="Administrator">Administrator</option>
