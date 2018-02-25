@@ -23,7 +23,7 @@
 				</tr>
 				<tr>
 					<td><input type="submit" value="Login"></td>
-					<td><a href="registerUser.jsp">Register</a></td>
+					<td><a href="#">Forgot Password</a></td>
 				</tr>
 			</table>
 				${errorMessage}

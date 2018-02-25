@@ -25,6 +25,14 @@
 		<h1>Home</h1>
 	
 		<p>Welcome, <c:out value="${user.fName}!" /></p>
+		
+		<table>
+			<tr>
+				<td><a href="manage.jsp">Manage Users</a></td>
+				<td><a href="courseevaluation.jsp">Course Evaluations</a></td>
+				<td><a href="settings.jsp">User Settings</a></td>
+			</tr>
+		</table>
 	
 	</div>
 

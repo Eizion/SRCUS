@@ -37,6 +37,7 @@
      							<option value="">-----</option>
      							<option value="Administrator">Administrator</option>
      							<option value="Student">Student</option>
+     							<option value="Insturctor">Instructor</option>
      						</select>
      					</td>
      				</tr>
