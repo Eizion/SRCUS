@@ -8,6 +8,7 @@
 </head>
 <body>
 
+	${message}
 	<a href="securityQuestion.jsp">Set Security Questions</a>
 	<a href="#">Change Password</a>
 

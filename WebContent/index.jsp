@@ -29,5 +29,7 @@
 				${errorMessage}
 		</form>
 		
+		<!-- select answer from security_answer, user where security_answer.user_id = user.user_id and email = 'joe.vo28@gmail.com'; -->
+		
 </body>
 </html>

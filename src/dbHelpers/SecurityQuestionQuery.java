@@ -48,4 +48,23 @@ public class SecurityQuestionQuery {
 		}
 	}
 	
+	public void checkEmptyAnswers(String email) {
+		
+		String query = "select answer from security_answer, user where security_answer.user_id = user.user_id and email = ?";
+		
+		try {
+			PreparedStatement ps = connection.prepareStatement(query);
+			
+			ps.setString(1, email);
+
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println(e);
+		}
+		
+	}
+	
 }

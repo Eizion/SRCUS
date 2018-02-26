@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dbHelpers.LoginQuery;
+import dbHelpers.SecurityQuestionQuery;
 import model.User;
 import utilities.Encryption;
 
@@ -78,6 +79,8 @@ public class LoginServlet extends HttpServlet {
 				session.invalidate();
 				session=request.getSession(true);
 				session.setAttribute("user", user);
+				//SecurityQuestionQuery checkAnswer = new SecurityQuestionQuery("srcus_master", "root", "root");
+				//checkAnswer.checkEmptyAnswers(email);
 				url="home.jsp";
 			} else {
 				String errorMessage = "Error: Unrecognized Email or Password <br>Login attempts remaining: "+(3-(loginAttempts));

@@ -78,7 +78,9 @@ public class SecurityServlet extends HttpServlet {
 		questionQuery.addAnswers(sa2);
 		questionQuery.addAnswers(sa3);
 		
-		url = "securitySuccess.jsp";
+		String message = "You have successfully updated your security questions.";
+		request.setAttribute("message", message);
+		url = "settings.jsp";
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
