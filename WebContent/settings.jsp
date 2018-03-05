@@ -9,8 +9,8 @@
 <body>
 
 	${message}
-	<a href="securityQuestion.jsp">Set Security Questions</a>
-	<a href="#">Change Password</a>
+	<a href="securityQuestion.jsp">Set Security Question</a>
+	<a href="changePassword.jsp">Change Password</a>
 
 </body>
 </html>

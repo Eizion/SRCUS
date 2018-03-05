@@ -49,9 +49,11 @@ public class RegisterServlet extends HttpServlet {
 		String lName = request.getParameter("lname");
 		String role = request.getParameter("role");
 		
+		//encrypting password
 		Encryption pwd = new Encryption();
 		String encryptedPass = pwd.encrypt(password);
 		
+		//makes sure an user with same email does not already exist
 		CheckUserQuery cu = new CheckUserQuery("srcus_master", "root", "root");
 		User user = cu.checkUser(email);
 		

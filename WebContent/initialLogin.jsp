@@ -4,11 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Security Question</title>
+<title>Security Question and Password</title>
 </head>
 <body>
 
-	<form name="Security" action="SecurityServlet" method="post">
+	<p>Please select a security question and change your password</p>
+	<form name="Security" action="InitialLoginUpdateServlet" method="post">
 		<table>
 			<tr>
 				<td>Question</td>
@@ -28,6 +29,13 @@
 				<td>
 					<input type="text" name="answer" required/>
 				</td>
+			</tr>
+		</table>
+		<br>
+		<table>
+			<tr>
+				<td><label>Password:</label></td>
+     			<td><input type="password" name="password" required/></td>
 			</tr>
 		</table>
 		<input type="submit" name="submit" value="Submit">

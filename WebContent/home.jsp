@@ -22,6 +22,7 @@
 	<div class="wrapper">
 	
 		<h1>Home</h1>
+		${message}
 	
 		<p>Welcome, <c:out value="${user.fName}!" /></p>
 		
