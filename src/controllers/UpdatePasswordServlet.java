@@ -73,6 +73,7 @@ public class UpdatePasswordServlet extends HttpServlet {
 		} else {
 			UpdateCredsQuery ucq = new UpdateCredsQuery ("srcus_master", "root", "root");
 			ucq.updatePassword(encryptedNewPass, email);
+			user.setPassword(encryptedNewPass);
 			String message = "You have successfully updated password.";
 			request.setAttribute("message", message);
 			url = "settings.jsp";
