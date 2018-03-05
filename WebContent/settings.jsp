@@ -11,6 +11,7 @@
 	${message}
 	<a href="securityQuestion.jsp">Set Security Question</a>
 	<a href="changePassword.jsp">Change Password</a>
+	<a href="viewProfile.jsp">View Profile</a>
 
 </body>
 </html>
