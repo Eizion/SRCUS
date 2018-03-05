@@ -13,7 +13,6 @@
     	<div class="nav">    		
     		<ul id="nav_ul">
 				<li class="nav_li"><a href="home.jsp">Home</a></li>
-				<li class="nav_li"><a href="account.jsp">Account</a></li>
 				<li class="nav_li"><a href="login?logout=true">Logout</a></li>
 			</ul>			
 		</div>		
@@ -23,6 +22,7 @@
 	<div class="wrapper">
 	
 		<h1>Home</h1>
+		${message}
 	
 		<p>Welcome, <c:out value="${user.fName}!" /></p>
 		

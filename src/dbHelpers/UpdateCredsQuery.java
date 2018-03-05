@@ -3,16 +3,15 @@ package dbHelpers;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import model.SecurityAnswer;
 
-public class SecurityQuestionQuery {
+public class UpdateCredsQuery {
 	
-	private Connection connection;
+private Connection connection;
 	
-	public SecurityQuestionQuery(String dbName, String uname, String pwd) {
+	public UpdateCredsQuery(String dbName, String uname, String pwd) {
 		
 		String url = "jdbc:mysql://localhost:3306/" + dbName;
 		
@@ -48,23 +47,23 @@ public class SecurityQuestionQuery {
 		}
 	}
 	
-	public void checkEmptyAnswers(String email) {
+	public void updatePassword(String encryptedPass, String email){
 		
-		String query = "select answer from security_answer, user where security_answer.user_id = user.user_id and email = ?";
+		String query = "update user set password=? where email=?";
 		
 		try {
 			PreparedStatement ps = connection.prepareStatement(query);
 			
-			ps.setString(1, email);
-
+			ps.setString(1, encryptedPass);
+			ps.setString(2, email);
+			
 			ps.executeUpdate();
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println(e);
 		}
 		
 	}
-	
+
 }

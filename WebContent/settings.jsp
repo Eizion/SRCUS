@@ -9,7 +9,7 @@
 <body>
 
 	${message}
-	<a href="securityQuestion.jsp">Set Security Questions</a>
+	<a href="securityQuestion.jsp">Set Security Question</a>
 	<a href="#">Change Password</a>
 	<a href="viewProfile.jsp">View Profile</a>
 
