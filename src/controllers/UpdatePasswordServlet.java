@@ -53,7 +53,6 @@ public class UpdatePasswordServlet extends HttpServlet {
 		String newPassword1 = request.getParameter("newPassword1");
 		String newPassword2 = request.getParameter("newPassword2");
 		String errorMessage = "";
-		System.out.println("email" + email);
 		
 		//running in entered password through encryption tool
 		Encryption encrypted = new Encryption();
@@ -65,28 +64,19 @@ public class UpdatePasswordServlet extends HttpServlet {
 			errorMessage = "Your current password was incorect.";
 			request.setAttribute("errorMessage", errorMessage);
 			url="changePassword.jsp";
-		}
-		if (newPassword1.compareTo(newPassword2) != 0){
+		//check to see if new passwords match
+		} else if (newPassword1.compareTo(newPassword2) != 0){
 			errorMessage = "The new passwords do not match.";
 			request.setAttribute("errorMessage", errorMessage);
 			url="changePassword.jsp";
-		} 
-		if (oldPassword1.compareTo(encryptedPassword2) == 0 && newPassword1.compareTo(newPassword2) == 0){
+		//update password
+		} else {
 			UpdateCredsQuery ucq = new UpdateCredsQuery ("srcus_master", "root", "root");
 			ucq.updatePassword(encryptedNewPass, email);
 			String message = "You have successfully updated password.";
 			request.setAttribute("message", message);
 			url = "settings.jsp";
-		} else {
-			errorMessage = "Something went wrong. We were unable to update your password.";
-			request.setAttribute("errorMessage", errorMessage);
-			url="changePassword.jsp";
-		}
-		
-		System.out.println("encrypt2:" + encryptedPassword2);
-		System.out.println("new1:" + newPassword1);
-		System.out.println("new2:" + newPassword2);
-		System.out.println("new encr:" + encryptedNewPass);
+		} 
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);	
