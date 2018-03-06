@@ -24,7 +24,6 @@ import model.User;
 @WebServlet({ "/ForgotPasswordServlet", "/forgotpassword" })
 public class ForgotPasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private HttpSession session;
 	private String url;
        
     /**
@@ -48,7 +47,7 @@ public class ForgotPasswordServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		session = request.getSession();
+		HttpSession session = request.getSession();
 		
 		String email = request.getParameter("email");
 		CheckUserQuery cu = new CheckUserQuery("srcus_master", "root", "root");
@@ -71,9 +70,9 @@ public class ForgotPasswordServlet extends HttpServlet {
 			SecurityQuestion securityQuestion = fp.getSecurityQuestion();
 			question = securityQuestion.getS_question();
 			
-			request.setAttribute("securityAnswer", securityAnswer);
-			request.setAttribute("securityQuestion", securityQuestion);
-			request.setAttribute("forgotUser", forgotUser);
+			session.setAttribute("securityAnswer", securityAnswer);
+			session.setAttribute("securityQuestion", securityQuestion);
+			session.setAttribute("forgotUser", forgotUser);
 			request.setAttribute("question", question);
 			url = "challenge.jsp";
 		}

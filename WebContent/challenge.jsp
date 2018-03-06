@@ -10,7 +10,7 @@
 
 	${errorMessage}
 	<p>Please answer your security question.</p>
-	<form name="questions" action="CheckSQServlet" method="post">
+	<form name="questions" action="CheckChallengeServlet" method="post">
 		${question}
 		<input type="text" name="answer" required />
 		<input type="submit" value="Submit">

@@ -20,7 +20,6 @@ import model.User;
 @WebServlet({ "/CheckChallengeServlet", "/checkChallenge" })
 public class CheckChallengeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private HttpSession session;
 	private String url;
        
     /**
@@ -44,7 +43,8 @@ public class CheckChallengeServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		session = request.getSession();
+		HttpSession session = request.getSession();
+		
 		User forgotUser = (User) session.getAttribute("forgotUser");
 		SecurityQuestion securityQuestion = (SecurityQuestion) session.getAttribute("securityQuestion");
 		SecurityAnswer securityAnswer = (SecurityAnswer) session.getAttribute("securityAnswer");
