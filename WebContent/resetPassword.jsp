@@ -4,17 +4,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Update Password</title>
+<title>Reset Password</title>
 </head>
 <body>
 
 	${errorMessage}
-	<form name="updatePassword" action="updatePassword" method="post">
+	<p>Please enter a new password</p>
+	
+	<form name="updatePassword" action="resetPassword" method="post">
 		<table>
-			<tr>
-     			<td><label>Old Password:</label></td>
-     			<td><input type="password" name="oldPassword" required/></td>
-     		</tr>
      		<tr>
      			<td><label>New Password:</label></td>
      			<td><input type="password" name="newPassword1" required/></td>
@@ -25,12 +23,9 @@
      		</tr>
      		<tr>
      			<td><input type="submit" name="submit" value="Submit"></td>
-     			<td><a href="settings.jsp">back</a></td>
    			</tr>
 		</table>
-	
 	</form>
-	
 
 </body>
 </html>
