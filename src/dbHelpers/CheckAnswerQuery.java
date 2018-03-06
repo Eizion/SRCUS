@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import model.SecurityAnswer;
+
 public class CheckAnswerQuery {
 	
 	private Connection connection;
@@ -29,9 +31,10 @@ public class CheckAnswerQuery {
 	public boolean checkEmptyAnswer(String email) {
 		
 		boolean emptyAnswer = true;
+		String query = "select answer from security_answer, user where security_answer.user_id = user.user_id and email = ?";
 		
 		try {
-			PreparedStatement ps = connection.prepareStatement("select answer from security_answer, user where security_answer.user_id = user.user_id and email = ?");
+			PreparedStatement ps = connection.prepareStatement(query);
 			
 			ps.setString(1, email);
 			
