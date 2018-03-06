@@ -8,7 +8,7 @@
 </head>
 <body>
 
-	<form name="Security" action="SecurityServlet" method="post">
+	<form name="Security" action="updateSecurityQuestion" method="post">
 		<table>
 			<tr>
 				<td>Question</td>

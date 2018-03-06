@@ -5,13 +5,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import model.User;
-
-public class UpdateSecurityQuestion {
+public class UpdateSecurityQuestionQuery {
 	
 	private Connection connection;
 	
-	public UpdateSecurityQuestion(String dbName, String uname, String pwd) {
+	public UpdateSecurityQuestionQuery(String dbName, String uname, String pwd) {
 		
 		String url = "jdbc:mysql://localhost:3306/" + dbName;
 		
@@ -27,15 +25,16 @@ public class UpdateSecurityQuestion {
 		}
 	}
 	
-	public void updateAnswer(String answer, int user_id){
+	public void updateAnswer(int sq_id, String answer, int user_id){
 		
-		String query = "update security_answer set answer=? where user_id=?";
+		String query = "update security_answer set sq_id=?, answer=? where user_id=?";
 		
 		try {
 			PreparedStatement ps = connection.prepareStatement(query);
 			
-			ps.setString(1, answer);
-			ps.setInt(1, user_id);
+			ps.setInt(1, sq_id);
+			ps.setString(2, answer);
+			ps.setInt(3, user_id);
 			
 			ps.executeUpdate();
 			
