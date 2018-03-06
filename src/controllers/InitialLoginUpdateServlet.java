@@ -70,6 +70,7 @@ public class InitialLoginUpdateServlet extends HttpServlet {
 		//Update password
 		String email = user.getEmail();
 		ucq.updatePassword(encryptedPass, email);
+		user.setPassword(encryptedPass);
 		
 		//setting success message and url for redirect
 		String message = "You have successfully updated your security question and password.";

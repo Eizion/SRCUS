@@ -7,11 +7,9 @@
 <title>User Settings</title>
 </head>
 <body>
-
-	${message}
-	<a href="securityQuestion.jsp">Set Security Questions</a>
-	<a href="changePassword">Change Password</a>
+	<p>${message}</p>
+	<a href="securityQuestion.jsp">Set Security Question</a>
+	<a href="changePassword.jsp">Change Password</a>
 	<a href="viewProfile.jsp">View Profile</a>
-
 </body>
 </html>
