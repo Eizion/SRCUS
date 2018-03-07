@@ -23,7 +23,7 @@
 				
 				
 					<input style="padding-top: 0px;padding-bottom:  0px;" class="btn btn-primary" type="submit" value="Login">
-					<a style="margin-left: 57px;" href="#">Forgot Password</a>
+					<a style="margin-left: 57px;" href="forgotpassword.jsp">Forgot Password</a>
 				
 			
 				${errorMessage}
