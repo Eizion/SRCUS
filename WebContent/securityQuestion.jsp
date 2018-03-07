@@ -8,7 +8,8 @@
 </head>
 <body>
 
-	<form name="Security" action="SecurityServlet" method="post">
+	${errorMessage}
+	<form name="Security" action="updateSecurityQuestion" method="post">
 		<table>
 			<tr>
 				<td>Question</td>
@@ -30,6 +31,8 @@
 				</td>
 			</tr>
 		</table>
+		<p>Enter your password</p>
+		<input type="password" name="password" required/>
 		<input type="submit" name="submit" value="Submit">
 	</form>
 

@@ -11,9 +11,26 @@
 <body style="background-color: dodgerblue;" >
 	
 	<h1>Southeast Regional Credit Union Schools Web Portal</h1>
-	<h3>Log In</h3>
-    
+	<div>
+    <div style="
+    width: 20%;
+    height: 20%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+">
+<div style="
+    background-color: white;
+    padding: 25px;
+    box-shadow: 3px 3px 3px #888888;
+    border-radius: 0px;
+">
+    <h3 style="text-align: center;padding-bottom:  10px;">Log In</h3>
     	<form name="loginForm" action="login" method="post">
+
 			
 				
 					<div style="padding-bottom: 15px;"><span>Email</span><span style="padding-left: 31px;"> <input type="text" name="email" required /></span></div>
@@ -24,8 +41,6 @@
 				
 					<input style="padding-top: 0px;padding-bottom:  0px;" class="btn btn-primary" type="submit" value="Login">
 					<a style="margin-left: 57px;" href="forgotpassword.jsp">Forgot Password</a>
-				
-			
 				${errorMessage}
 		</form>
 		</div>
