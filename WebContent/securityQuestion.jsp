@@ -8,6 +8,7 @@
 </head>
 <body>
 
+	${errorMessage}
 	<form name="Security" action="updateSecurityQuestion" method="post">
 		<table>
 			<tr>
@@ -30,6 +31,8 @@
 				</td>
 			</tr>
 		</table>
+		<p>Enter your password</p>
+		<input type="password" name="password" required/>
 		<input type="submit" name="submit" value="Submit">
 	</form>
 

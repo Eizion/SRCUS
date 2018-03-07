@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import dbHelpers.UpdateSecurityQuestionQuery;
 import model.User;
+import utilities.Encryption;
 
 /**
  * Servlet implementation class UpdateSecurityQuestionServlet
@@ -49,14 +50,26 @@ public class UpdateSecurityQuestionServlet extends HttpServlet {
 		
 		int sq_id = Integer.parseInt(request.getParameter("sq"));
 		String answer = request.getParameter("answer");
+		String password = request.getParameter("password");
 		int user_id = user.getId();
+		String savedPassword = user.getPassword();
+		String errorMessage = "";
 		
-		UpdateSecurityQuestionQuery usq = new UpdateSecurityQuestionQuery("srcus_master", "root", "root");
-		usq.updateAnswer(sq_id, answer, user_id);
+		Encryption sp = new Encryption();
+		String enteredPassword = sp.encrypt(password);
 		
-		String message = "You have successfully updated your security question.";
-		request.setAttribute("message", message);
-		url = "settings.jsp";
+		if (savedPassword.compareTo(enteredPassword) != 0) {
+			errorMessage = "You put in an incorrect password.";
+			request.setAttribute("errorMessage", errorMessage);
+			url="securityQuestion.jsp";
+		} else {
+			UpdateSecurityQuestionQuery usq = new UpdateSecurityQuestionQuery("srcus_master", "root", "root");
+			usq.updateAnswer(sq_id, answer, user_id);
+			
+			String message = "You have successfully updated your security question.";
+			request.setAttribute("message", message);
+			url = "settings.jsp";
+		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);	
