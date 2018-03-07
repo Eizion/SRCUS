@@ -4,14 +4,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>User Settings</title>
+<title>Security Challenge</title>
 </head>
 <body>
 
-	${message}
-	<a href="securityQuestion.jsp">Set Security Question</a>
-	<a href="changePassword.jsp">Change Password</a>
-	<a href="viewProfile.jsp">View Profile</a>
+	${errorMessage}
+	<p>Please answer your security question.</p>
+	<form name="questions" action="CheckChallengeServlet" method="post">
+		${question}
+		<input type="text" name="answer" required />
+		<input type="submit" value="Submit">
+	</form>
 
 </body>
 </html>
