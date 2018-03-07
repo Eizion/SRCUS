@@ -11,24 +11,8 @@
 <body style="background-color: dodgerblue;" >
 	
 	<h1>Southeast Regional Credit Union Schools Web Portal</h1>
-	<div>
-    <div style="
-    width: 20%;
-    height: 20%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-">
-<div style="
-    background-color: white;
-    padding: 25px;
-    box-shadow: 3px 3px 3px #888888;
-    border-radius: 0px;
-">
-    <h3 style="text-align: center;padding-bottom:  10px;">Log In</h3>
+	<h3>Log In</h3>
+    
     	<form name="loginForm" action="login" method="post">
 			
 				
