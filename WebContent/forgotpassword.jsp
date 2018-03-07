@@ -4,14 +4,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>User Settings</title>
+<title>Forgot Password</title>
 </head>
 <body>
 
-	${message}
-	<a href="securityQuestion.jsp">Set Security Question</a>
-	<a href="changePassword.jsp">Change Password</a>
-	<a href="viewProfile.jsp">View Profile</a>
+	${errorMessage}
+	<p>Please enter in your email address</p>
+	<form name="emailForm" action="forgotpassword" method="post">
+		Email:
+		<input type="text" name="email" required />
+		<input type="submit" value="Submit">
+	</form>
+
 
 </body>
 </html>
