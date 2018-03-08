@@ -53,7 +53,6 @@ public class UpdatePasswordServlet extends HttpServlet {
 		String newPassword1 = request.getParameter("newPassword1");
 		String newPassword2 = request.getParameter("newPassword2");
 		String errorMessage = "";
-		System.out.println("email" + email);
 		
 		//running in entered password through encryption tool
 		Encryption encrypted = new Encryption();
@@ -82,11 +81,6 @@ public class UpdatePasswordServlet extends HttpServlet {
 			request.setAttribute("errorMessage", errorMessage);
 			url="changePassword.jsp";
 		}
-		
-		System.out.println("encrypt2:" + encryptedPassword2);
-		System.out.println("new1:" + newPassword1);
-		System.out.println("new2:" + newPassword2);
-		System.out.println("new encr:" + encryptedNewPass);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);	
