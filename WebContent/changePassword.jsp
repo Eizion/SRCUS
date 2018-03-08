@@ -4,7 +4,6 @@
 <html>
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Update Password</title>
 </head>
@@ -12,12 +11,7 @@
 
 	${errorMessage}
 		<div style="width: 20%;height: 20%;position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;">
-	<div style="
-    background-color: white;
-    padding: 25px;
-    box-shadow: 3px 3px 3px #888888;
-    border-radius: 0px;
-">
+	<div style="background-color: white; padding: 25px; box-shadow: 3px 3px 3px #888888;border-radius: 0px;">
 	<form name="updatePassword" action="updatePassword" method="post">
 		<table>
 			<tr>
