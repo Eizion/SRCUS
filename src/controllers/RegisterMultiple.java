@@ -47,7 +47,7 @@ public class RegisterMultiple extends HttpServlet {
 		String password = request.getParameter("password");
 		String fName = request.getParameter("fname");
 		String lName = request.getParameter("lname");
-		String role = request.getParameter("role");
+		int role = Integer.parseInt(request.getParameter("role"));
 		
 		Encryption pwd = new Encryption();
 		String encryptedPass = pwd.encrypt(password);

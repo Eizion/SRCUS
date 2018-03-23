@@ -7,7 +7,7 @@ public class User {
 	private String password;
 	private String fName;
 	private String lName;
-	private String role;
+	private int role;
 	
 	/**
 	 * 
@@ -22,7 +22,7 @@ public class User {
 	 * @param fName
 	 * @param lName
 	 */
-	public User(int user_id, String email, String password, String fName, String lName, String role) {
+	public User(int user_id, String email, String password, String fName, String lName, int role) {
 		this.user_id = user_id;
 		this.password = password;
 		this.fName = fName;
@@ -104,14 +104,14 @@ public class User {
 	/**
 	 * @return the role
 	 */
-	public String getRole() {
+	public int getRole() {
 		return role;
 	}
 
 	/**
 	 * @param role the role to set
 	 */
-	public void setRole(String role) {
+	public void setRole(int role) {
 		this.role = role;
 	}
 

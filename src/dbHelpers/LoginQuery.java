@@ -39,7 +39,7 @@ public class LoginQuery {
 			ResultSet rs = authenticateUserStatement.executeQuery();
 			
 			if (rs.next()) {
-				user = new User(rs.getInt("user_id"), rs.getString("email"), rs.getString("password"), rs.getString("fName"), rs.getString("lName"), rs.getString("role"));
+				user = new User(rs.getInt("user_id"), rs.getString("email"), rs.getString("password"), rs.getString("fName"), rs.getString("lName"), rs.getInt("role"));
 			}
 			
 		} catch (SQLException e) {

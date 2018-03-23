@@ -39,7 +39,7 @@ public class RegisterQuery {
 			ps.setString(2, user.getPassword());
 			ps.setString(3, user.getfName());
 			ps.setString(4, user.getlName());
-			ps.setString(5, user.getRole());
+			ps.setInt(5, user.getRole());
 			
 			ps.executeUpdate();
 			

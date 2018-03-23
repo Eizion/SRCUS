@@ -38,7 +38,7 @@
 	
 		<h2>Welcome, <c:out value="${user.fName}!!!" /></h2>
 		
-		
+		<c:if test = "${user.role == 1 }">
 				<div style="
     background-color: darkgray;
     width: 9%;
@@ -48,6 +48,7 @@
     margin-left: 40px;
         margin-bottom: 30px;
 "><a href="manage.jsp">Manage Users</a></div>
+		</c:if>
 				<div style="
     background-color: darkgray;
     width: 9%;
