@@ -22,11 +22,15 @@
         <h1>Create Multiple Users</h1>
         <input type="file" id="fileUploadCSV" />
         <input type="button" value="Upload csv" id="btnUpload" />
+        <table>
         <tr>
-            <td><input type="submit" name="submit" value="Register"></td>
-        </tr>
+            <!--<td><input type="submit" name="submit" value="Register"></td>-->
+
         <td><a href="index.jsp">Go Back</a></td>
+        </tr>
+        </table>
         <form name="registration" action="register" method="post">
+        <input type="submit" name="submit" value="Register">
             <table class="table" id="tblMultileads">
                 <tr>
                     <th>Email</th>
@@ -92,11 +96,11 @@
                                         for (i = 0; i < jsonArray.length; i++) {
                                             debugger;
                                             if (jsonArray[i].Name != "") {
-                                                html += "<tr id=\"rowitem\"" + i + "><td style=\"display:none;\">" + i + "</td><td><input type=\"text\" value=\"" + jsonArray[i].email + "\">  </input> </td>";
-                                                html += "<td><input type=\"password\" value= \"" + jsonArray[i].password + "\"></input></td>";
-                                                html += "<td><input type=\"text\" value= \"" + jsonArray[i].fname + "\" ></input></td>";
-                                                html += "<td><input type=\"text\" value= \"" + jsonArray[i].lname + "\" ></input></td>";
-                                                html += "<td><input type=\"text\" value= \"" + jsonArray[i].role + "\" ></input></td>";
+                                                html += "<tr id=\"rowitem\"" + i + "><td style=\"display:none;\">" + i + "</td><td><input type=\"text\" name=\"email\" value=\"" + jsonArray[i].email + "\">  </input> </td>";
+                                                html += "<td><input type=\"password\" name=\"password\" value= \"" + jsonArray[i].password + "\"></input></td>";
+                                                html += "<td><input type=\"text\" name=\"fname\" value= \"" + jsonArray[i].fname + "\" ></input></td>";
+                                                html += "<td><input type=\"text\" name=\"lname\" value= \"" + jsonArray[i].lname + "\" ></input></td>";
+                                                html += "<td><input type=\"text\" name=\"role\" value= \"" + jsonArray[i].role + "\" ></input></td>";
                                             }
                                         }
                                         document.getElementById('tbodyLeads').innerHTML = html;
