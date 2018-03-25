@@ -13,9 +13,11 @@
 	<div style="background-color: white; padding: 25px; box-shadow: 3px 3px 3px #888888;border-radius: 0px;">
 	
 	
-	<h3>You have successfully registered!</h3>
+	<h3>You have successfully registered the user</h3>
 	
-	<p>Please <a href="index.jsp">Login</a></p>
+	<p>
+		<a href="home.jsp">Home</a>
+	</p>
 </div>
 </div>
 </body>
