@@ -53,7 +53,7 @@ public class SelectEvaluationServlet extends HttpServlet {
 		int year = Integer.parseInt(request.getParameter("year"));
 		String term = request.getParameter("term");
 		String submit = request.getParameter("submit");
-		CreateEvaluation ce = new CreateEvaluation("srcus_master", "root", "Tsega12!");
+		CreateEvaluation ce = new CreateEvaluation("srcus_master", "root", "root");
 		
 		//Check to see if the evaluation already exists 
 		//if it exists it returns the evaluation if not it returns null
@@ -67,7 +67,7 @@ public class SelectEvaluationServlet extends HttpServlet {
 			}
 		}else if(existing != null){
 			//Retrieve the questions for the evaluation
-			RetrieveQuestion re = new RetrieveQuestion("srcus_master", "root", "Tsega12!");
+			RetrieveQuestion re = new RetrieveQuestion("srcus_master", "root", "root");
 			Question[] container = re.getquestion(existing); 
 			if (container.length == questionNum) {
 				last = true;          // to check if it is the last question
@@ -87,7 +87,7 @@ public class SelectEvaluationServlet extends HttpServlet {
 			}
 			}
 			else if(submit.equals("Delete Evaluation")) {
-				UpdateQuestion uq = new UpdateQuestion("srcus_master", "root", "Tsega12!");
+				UpdateQuestion uq = new UpdateQuestion("srcus_master", "root", "root");
 				for(int i =0; i < container.length; i++) {
 					questionNum = i+1;
 					String questionType = container[i].getQuestionType();

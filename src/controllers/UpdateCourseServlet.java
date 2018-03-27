@@ -53,7 +53,7 @@ public class UpdateCourseServlet extends HttpServlet {
 		
 		//create a new objects of type Course and UpdateCourse 
 		Course course = new Course(courseID, courseName, creditHr, courseType, courseYear);
-		UpdateCourse up = new UpdateCourse("srcus_master", "root", "Tsega12!");
+		UpdateCourse up = new UpdateCourse("srcus_master", "root", "root");
 		//Execute update
 		up.doUpdate(course, oldCourseID);
 		String message="You have succefully modified the course! Edit another one";

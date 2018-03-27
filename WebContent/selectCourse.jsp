@@ -21,7 +21,7 @@
 		<h5>Select the course to be edited</h5>
 		<sql:setDataSource var = "srcus" driver = "com.mysql.jdbc.Driver"
          url = "jdbc:mysql://localhost:3306/srcus_master"
-         user = "root"  password = "Tsega12!"/>
+         user = "root"  password = "root"/>
 		
          <sql:query dataSource = "${srcus}" var = "result">
             SELECT CourseID, CourseName from Course;

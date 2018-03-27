@@ -30,6 +30,7 @@
 </nav>
 	</div>
 	<a href="addCourse.jsp">Create Course</a><br>
+	<a href="selectCourse.jsp">Select Course</a><br>
 	<a href="CreateEvaluation.jsp">Create Evaluations</a><br>
 	<a href="editEvaluation.jsp">Edit Evaluation</a><br>
 	<a href="selectEvaluation.jsp">Load Evaluation</a><br>

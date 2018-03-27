@@ -56,7 +56,7 @@ public class EditCourseServlet extends HttpServlet {
 			url="/selectCourse.jsp";
 		}
 		else{
-			CheckCourse check= new CheckCourse("srcus_master", "root", "Tsega12!");
+			CheckCourse check= new CheckCourse("srcus_master", "root", "root");
 			Course selected = check.doCheckID(courseID);
 			request.setAttribute("course", selected);
 			url="/editCourse.jsp";
@@ -64,9 +64,9 @@ public class EditCourseServlet extends HttpServlet {
 		}
 		}
 		else if(submit.equals("Assign Instructors")) {
-			CheckCourse check= new CheckCourse("srcus_master", "root", "Tsega12!");
+			CheckCourse check= new CheckCourse("srcus_master", "root", "root");
 			Course selected = check.doCheckID(courseID);
-			RetrieveInstructors ri = new RetrieveInstructors("srcus_master", "root", "Tsega12!");
+			RetrieveInstructors ri = new RetrieveInstructors("srcus_master", "root", "root");
 			ArrayList<Instructor> instrList = ri.doRetrieve();
 			HttpSession session = request.getSession();
 			session.setAttribute("course", selected);

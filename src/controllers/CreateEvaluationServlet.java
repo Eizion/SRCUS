@@ -54,7 +54,7 @@ public class CreateEvaluationServlet extends HttpServlet {
 		String submDate = request.getParameter("submDate");
 		
 		//Create a connection to database and add the info
-		CreateEvaluation ce = new CreateEvaluation("srcus_master", "root", "Tsega12!");
+		CreateEvaluation ce = new CreateEvaluation("srcus_master", "root", "root");
 		
 		//Check to see if the same evaluation already exists 
 		Evaluation existing = ce.doCheck(instrID, courseID, year, term);

@@ -60,7 +60,7 @@ public class AddQuestionsServlet extends HttpServlet {
 
 		 }
 	
-		AddQuestion aq = new AddQuestion("srcus_master", "root", "Tsega12!");
+		AddQuestion aq = new AddQuestion("srcus_master", "root", "root");
 		aq.doAddQuestion(question, questionType, eval, questionNum);
 		
 		//insert the choice options if question is a choose question or multi-select
@@ -82,7 +82,7 @@ public class AddQuestionsServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 		}
 		else if (clicked.equals("Finish")){     //marks the end of the evaluation entry
-			url ="/evaluation.jsp";
+			url ="/courseevaluation.jsp";
 			session.removeAttribute("questionNum");
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);

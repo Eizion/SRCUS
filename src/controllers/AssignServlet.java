@@ -47,7 +47,7 @@ public class AssignServlet extends HttpServlet {
 		String[] instructors = request.getParameterValues("instructor");
 		int year = Integer.parseInt(request.getParameter("year"));
 		String term = request.getParameter("term");
-		RetrieveInstructors ri = new RetrieveInstructors("srcus_master", "root", "Tsega12!");
+		RetrieveInstructors ri = new RetrieveInstructors("srcus_master", "root", "root");
 		String courseID = course.getCourseID();
 		ArrayList<String> assignments = ri.checkAssignment(courseID, year, term);
 		if(assignments.isEmpty()) {

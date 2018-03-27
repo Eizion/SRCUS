@@ -29,7 +29,7 @@
 		<h3>Select Evaluation</h3>
 		<sql:setDataSource var = "srcus" driver = "com.mysql.jdbc.Driver"
          url = "jdbc:mysql://localhost:3306/srcus_master"
-         user = "root"  password = "Tsega12!"/>
+         user = "root"  password = "root"/>
 		<c:catch var="e">
          <sql:query dataSource = "${srcus}" var = "instructor">
             SELECT InstrID, FName, LName, Title  from Instructor;

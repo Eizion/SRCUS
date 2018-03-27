@@ -61,7 +61,7 @@ public class SaveAnswersServlet extends HttpServlet {
 		}
 		String studentID = "5555";   // needs to be edited with real studentID
 		//create a connection to database and save answer
-		SaveAnswer sa = new SaveAnswer("srcus_master", "root", "Tsega12!");
+		SaveAnswer sa = new SaveAnswer("srcus_master", "root", "root");
 		sa.doSave(eval.getEvalID(), questionNum, studentID, answer);
 		questionNum++;
 		if (questionNum <= container.length) {

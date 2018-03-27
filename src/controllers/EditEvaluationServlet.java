@@ -70,10 +70,10 @@ public class EditEvaluationServlet extends HttpServlet {
 		String clicked = request.getParameter("submit");
 		
 		if(clicked.equals("Delete Question")){                // in case of delete question
-			UpdateQuestion uq = new UpdateQuestion("srcus_master", "root", "Tsega12!");
+			UpdateQuestion uq = new UpdateQuestion("srcus_master", "root", "root");
 			uq.doDelete(eval, questionNum, questionType);
 			uq.updateTable(eval, questionNum ,container.length); //update table after delete
-			RetrieveQuestion re = new RetrieveQuestion("srcus_master", "root", "Tsega12!");
+			RetrieveQuestion re = new RetrieveQuestion("srcus_master", "root", "root");
 			container = re.getquestion(eval);  //get the new array of questions
 			if(questionNum <= container.length) {
 				if(questionNum == container.length) { //last question in the array
@@ -96,7 +96,7 @@ public class EditEvaluationServlet extends HttpServlet {
 		}else {
 			//in case of update question 
 			//create a connection to database and update entries
-			UpdateQuestion uq = new UpdateQuestion("srcus_master", "root", "Tsega12!");
+			UpdateQuestion uq = new UpdateQuestion("srcus_master", "root", "root");
 			uq.updateQuestion(question, questionType, eval, questionNum);
 			
 				if(questionType.equals("giveAnswer")){

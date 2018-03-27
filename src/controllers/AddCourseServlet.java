@@ -52,13 +52,13 @@ public class AddCourseServlet extends HttpServlet {
 		String classYear = request.getParameter("classYear");
 		Course course = new Course(courseID, courseName, creditHr, courseType, classYear);
 		//check for existing course in database
-		CheckCourse check = new CheckCourse("srcus_master", "root", "Tsega12!");
+		CheckCourse check = new CheckCourse("srcus_master", "root", "root");
 		Course existCourse = check.doCheckID(courseID);
 		Course existName = check.doCheckName(courseName);
 		
 		//Add new course into database if it doesn't already exist
 		if(existCourse == null && existName == null){
-		AddCourse ac = new AddCourse("srcus_master", "root", "Tsega12!");
+		AddCourse ac = new AddCourse("srcus_master", "root", "root");
 		ac.doAdd(course);
 		message = "The new course "+ courseName + " was successfully created!"; 
 		}
