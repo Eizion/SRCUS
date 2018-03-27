@@ -8,18 +8,14 @@
 </head>
 <body>
 <h1>User Profile</h1>
-<<<<<<< HEAD
 
 <!-- Table to show user profile information -->
 
 
 
 
-=======
 <!-- Table to show user profile information -->
->>>>>>> refs/remotes/origin/master
 <table>
-<<<<<<< HEAD
      				<tr>
 	    				<td><label>Email:</label></td>
 	    				
@@ -44,31 +40,6 @@
      					<td><a href="settings.jsp">Back</a></td>
      				</tr>
      			</table>
-=======
-                    <tr>
-                        <td><label>Email:</label></td>
-                        
-                        <!--  Getting the user data via the "user" object -->
-                        <td>${user.email}</td>
-                    </tr>
-                    <tr>
-                        <td><label>First Name:</label></td>
-                        <td>${user.fname}</td>
-                    </tr>
-                    <tr>
-                        <td><label>Last Name:</label></td>
-                        <td>${user.lname}</td>
-                    </tr>
-                    <tr>
-                        <td><label>Role:</label></td>
-                        <td>${user.role}</td>
-                    </tr>
-                    <tr>
-                    
-                        <td><a href="editProfile.jsp">Edit Profile</a></td>
-                        <td><a href="settings.jsp">Back</a></td>
-                    </tr>
-                </table>
->>>>>>> refs/remotes/origin/master
+                   
 </body>
 </html>
