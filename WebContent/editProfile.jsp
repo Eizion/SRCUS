@@ -25,11 +25,11 @@
      				</tr>
      				<tr>
      					<td><label>First Name:</label></td>
-     					<td><input type="text" name="fname" value="${user.fname}" required/></td>
+     					<td><input type="text" name="fname" value="${user.fName}" required/></td>
      				</tr>
      				<tr>
 	    				<td><label>Last Name:</label></td>
-     					<td><input type="text" name="lname" value="${user.lname}" required/></td>
+     					<td><input type="text" name="lname" value="${user.lName}" required/></td>
      				</tr>
      				<tr>
      				

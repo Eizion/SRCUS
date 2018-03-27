@@ -48,8 +48,8 @@ public class UpdateServlet extends HttpServlet {
 		//Getting variables and whatnot
 		User user = (User) session.getAttribute("user");
 		String email = user.getEmail();
-		String fname = request.getParameter("fname");
-		String lname = request.getParameter("lname");
+		String fName = request.getParameter("fName");
+		String lName = request.getParameter("lName");
 		String errorMessage = "";
 		
 

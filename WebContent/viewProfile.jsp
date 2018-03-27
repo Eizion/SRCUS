@@ -24,11 +24,11 @@
      				</tr>
      				<tr>
      					<td><label>First Name:</label></td>
-     					<td>${user.fname}</td>
+     					<td>${user.fName}</td>
      				</tr>
      				<tr>
 	    				<td><label>Last Name:</label></td>
-     					<td>${user.lname}</td>
+     					<td>${user.lName}</td>
      				</tr>
      				<tr>
 	    				<td><label>Role:</label></td>
