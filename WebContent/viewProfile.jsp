@@ -11,7 +11,7 @@
 <body>
 <h1>User Profile</h1>
 
-<! Table to show user profile information >
+<!-- Table to show user profile information -->
 
 
 
@@ -20,7 +20,7 @@
      				<tr>
 	    				<td><label>Email:</label></td>
 	    				
-	    				<! Getting the user data via the "user" object >
+	    				<!--  Getting the user data via the "user" object -->
      					<td>${user.email}</td>
      				</tr>
      				<tr>

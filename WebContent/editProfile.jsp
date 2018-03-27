@@ -11,16 +11,16 @@
 <body>
 <h1>Edit Profile</h1>
 
-<! Table to edit user profile information >
+<!-- Table to edit user profile information -->
 
 
 
-		<form name="registration" action="register" method="post">
+		<form name="updateProfile" action="update" method="post">
 				<table>
      				<tr>
 	    				<td><label>Email:</label></td>
 	    				
-	    				<! Text field with the origional user data in it where the user can update if need be>
+	    				<!-- Text field with the origional user data in it where the user can update if need be-->
      					<td><input type="text" name="email" value="${user.email}" required/></td>
      				</tr>
      				<tr>
