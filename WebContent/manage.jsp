@@ -31,8 +31,8 @@
 	</div>
 <div style="width: 20%;height: 20%;position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;">
 	<div style="background-color: white; padding: 25px; box-shadow: 3px 3px 3px #888888;border-radius: 0px;">
-	<a href="registerUser.jsp">Create Individual User</a>
-	<a href="search">Edit User</a>
+	<a href="registerUser.jsp">Create Individual User</a><br>
+	<a href="search">Edit User</a><br>
 	<a href="registerMultiple.jsp">Register multi</a>
 
 </div>

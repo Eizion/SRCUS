@@ -10,7 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Admin - Course Evaluations</title>
 </head>
-<body>
+<body style="background-color: dodgerblue;">
 <div class="header">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">Southeast Regional Credit Union Schools Web Portal</a>
@@ -29,6 +29,8 @@
   </div>
 </nav>
 	</div>
+	<div style="width: 20%;height: 20%;position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;">
+	<div style="background-color: white; padding: 25px; box-shadow: 3px 3px 3px #888888;border-radius: 0px;">
 	<a href="addCourse.jsp">Create Course</a><br>
 	<a href="selectCourse.jsp">Select Course</a><br>
 	<a href="CreateEvaluation.jsp">Create Evaluations</a><br>
@@ -36,6 +38,8 @@
 	<a href="selectEvaluation.jsp">Load Evaluation</a><br>
 	<a href="#">Generate Reports</a><br>
 	<a href="#">View Reports</a>
+	</div>
+	</div>
 
 </body>
 </html>
