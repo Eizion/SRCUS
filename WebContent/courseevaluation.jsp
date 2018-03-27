@@ -29,8 +29,10 @@
   </div>
 </nav>
 	</div>
-	<a href="#">Create Course</a><br>
-	<a href="#">Create Evaluations</a><br>
+	<a href="addCourse.jsp">Create Course</a><br>
+	<a href="CreateEvaluation.jsp">Create Evaluations</a><br>
+	<a href="editEvaluation.jsp">Edit Evaluation</a><br>
+	<a href="selectEvaluation.jsp">Load Evaluation</a><br>
 	<a href="#">Generate Reports</a><br>
 	<a href="#">View Reports</a>
 
