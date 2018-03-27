@@ -15,17 +15,17 @@ import model.User;
 import utilities.Encryption;
 
 /**
- * Servlet implementation class RegisterServlet
+ * Servlet implementation class RegisterMultiple
  */
-@WebServlet("/register")
-public class RegisterServlet extends HttpServlet {
+@WebServlet("/RegisterMultiple")
+public class RegisterMultiple extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private String url;
+	private String url; 
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegisterServlet() {
+    public RegisterMultiple() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -49,18 +49,16 @@ public class RegisterServlet extends HttpServlet {
 		String lName = request.getParameter("lname");
 		int role = Integer.parseInt(request.getParameter("role"));
 		
-		//encrypting password
 		Encryption pwd = new Encryption();
 		String encryptedPass = pwd.encrypt(password);
 		
-		//makes sure an user with same email does not already exist
 		CheckUserQuery cu = new CheckUserQuery("srcus_master", "root", "root");
 		User user = cu.checkUser(email);
 		
 		if (user != null){
 			String errorMessage = "Error: Email already exists. Try another one.";
 			request.setAttribute("errorMessage", errorMessage);
-			url = "registerUser.jsp";
+			url = "registerMultiple.jsp";
 		} else {
 			User newUser = new User();
 			
@@ -83,3 +81,4 @@ public class RegisterServlet extends HttpServlet {
 	}
 
 }
+

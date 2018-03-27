@@ -3,16 +3,13 @@ package dbHelpers;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-//import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import model.User;
-
-public class RegisterQuery {
+public class UpdateSecurityQuestionQuery {
 	
 	private Connection connection;
 	
-	public RegisterQuery(String dbName, String uname, String pwd) {
+	public UpdateSecurityQuestionQuery(String dbName, String uname, String pwd) {
 		
 		String url = "jdbc:mysql://localhost:3306/" + dbName;
 		
@@ -28,25 +25,22 @@ public class RegisterQuery {
 		}
 	}
 	
-	public void doRegister(User user) {
+	public void updateAnswer(int sq_id, String answer, int user_id){
 		
-		String query = "insert into user (email, password, fName, lName, role) values (?, ?, ?, ?, ?)";
+		String query = "update security_answer set sq_id=?, answer=? where user_id=?";
 		
 		try {
 			PreparedStatement ps = connection.prepareStatement(query);
 			
-			ps.setString(1, user.getEmail());
-			ps.setString(2, user.getPassword());
-			ps.setString(3, user.getfName());
-			ps.setString(4, user.getlName());
-			ps.setInt(5, user.getRole());
+			ps.setInt(1, sq_id);
+			ps.setString(2, answer);
+			ps.setInt(3, user_id);
 			
 			ps.executeUpdate();
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println(e);
 		}
 	}
 

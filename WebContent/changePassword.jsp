@@ -8,7 +8,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>User Settings</title>
+<title>Update Password</title>
 </head>
 <body style="background-color: dodgerblue;">
 <div class="header">
@@ -30,44 +30,33 @@
 </nav>
 	</div>
 
-<h1>User Settings</h1>
-	${message}
+	${errorMessage}
+		<div style="width: 20%;height: 20%;position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;">
+	<div style="background-color: white; padding: 25px; box-shadow: 3px 3px 3px #888888;border-radius: 0px;">
+	<form name="updatePassword" action="updatePassword" method="post">
+		<table>
+			<tr>
+     			<td><label>Old Password:</label></td>
+     			<td><input type="password" name="oldPassword" required/></td>
+     		</tr>
+     		<tr>
+     			<td><label>New Password:</label></td>
+     			<td><input type="password" name="newPassword1" required/></td>
+     		</tr>
+     		<tr>
+     			<td><label>Retype Password:</label></td>
+     			<td><input type="password" name="newPassword2" required/></td>
+     		</tr>
+     		<tr>
+     			<td ><a href="settings.jsp">back</a></td>
+     			<td><span style="float:right;"><input type="submit" name="submit" value="Submit"></span></td>
+     			
+   			</tr>
+		</table>
 	
-				<div style="
-    background-color: darkgray;
-    width: 9%;
-    height: 20%;
-    padding: 20px;
-    border-radius: 15px;
-    margin-left: 40px;
-        margin-bottom: 30px;
-">
-	<a href="securityQuestion.jsp">Set Security Question</a>
+	</form>
 	</div>
-	
-				<div style="
-    background-color: darkgray;
-    width: 9%;
-    height: 20%;
-    padding: 20px;
-    border-radius: 15px;
-    margin-left: 40px;
-        margin-bottom: 30px;
-">
+	</div>
 
-				
-	<a href="changePassword.jsp">Change Password</a>
-	</div>
-	<div style="
-    background-color: darkgray;
-    width: 9%;
-    height: 20%;
-    padding: 20px;
-    border-radius: 15px;
-    margin-left: 40px;
-        margin-bottom: 30px;
-">
-	<a href="viewProfile.jsp">View Profile</a>
-	</div>
 </body>
 </html>

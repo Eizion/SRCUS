@@ -8,24 +8,24 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import dbHelpers.CheckUserQuery;
-import dbHelpers.RegisterQuery;
+import dbHelpers.UpdateCredsQuery;
 import model.User;
 import utilities.Encryption;
 
 /**
- * Servlet implementation class RegisterServlet
+ * Servlet implementation class ResetPasswordServlet
  */
-@WebServlet("/register")
-public class RegisterServlet extends HttpServlet {
+@WebServlet({ "/ResetPasswordServlet", "/resetPassword" })
+public class ResetPasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String url;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegisterServlet() {
+    public ResetPasswordServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,43 +43,32 @@ public class RegisterServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-		String fName = request.getParameter("fname");
-		String lName = request.getParameter("lname");
-		int role = Integer.parseInt(request.getParameter("role"));
+		HttpSession session = request.getSession();
 		
-		//encrypting password
-		Encryption pwd = new Encryption();
-		String encryptedPass = pwd.encrypt(password);
+		//Getting variables and whatnot
+		User user = (User) session.getAttribute("forgotUser");
+		String newPassword1 = request.getParameter("newPassword1");
+		String newPassword2 = request.getParameter("newPassword2");
+		String email = user.getEmail();
+		String errorMessage = "";
 		
-		//makes sure an user with same email does not already exist
-		CheckUserQuery cu = new CheckUserQuery("srcus_master", "root", "root");
-		User user = cu.checkUser(email);
-		
-		if (user != null){
-			String errorMessage = "Error: Email already exists. Try another one.";
+		if (newPassword1.compareTo(newPassword2) != 0) {
+			errorMessage = "The new passwords do not match.";
 			request.setAttribute("errorMessage", errorMessage);
-			url = "registerUser.jsp";
+			url = "resetPassword.jsp";
 		} else {
-			User newUser = new User();
+			Encryption encrypted = new Encryption();
+			String encryptedNewPass = encrypted.encrypt(newPassword1);
 			
-			newUser.setEmail(email);
-			newUser.setPassword(encryptedPass);
-			newUser.setfName(fName);
-			newUser.setlName(lName);
-			newUser.setRole(role);
-			
-			RegisterQuery rq = new RegisterQuery("srcus_master", "root", "root");
-			
-			rq.doRegister(newUser);
-			
-			url = "regSuccess.jsp";
+			UpdateCredsQuery ucq = new UpdateCredsQuery ("srcus_master", "root", "root");
+			ucq.updatePassword(encryptedNewPass, email);
+			errorMessage = "You have successfully updated password.";
+			request.setAttribute("errorMessage", errorMessage);
+			url = "index.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
-		dispatcher.forward(request, response);
-		
+		dispatcher.forward(request, response);	
 	}
 
 }

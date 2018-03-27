@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dbHelpers.CheckAnswerQuery;
 import dbHelpers.LoginQuery;
-import dbHelpers.SecurityQuestionQuery;
 import model.User;
 import utilities.Encryption;
 
@@ -58,9 +58,11 @@ public class LoginServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		session = request.getSession();
 		
+		//check for initial amount of login attempts
 		if(session.getAttribute("loginAttempts") == null) {
 			loginAttempts = 0;
 		}
+		//error message for exceeding number of login attempts
 		if(loginAttempts > 2) {
 			String errorMessage = "Error: Number of login attempts exceeded.";
 			request.setAttribute("errorMessage", errorMessage);
@@ -69,19 +71,32 @@ public class LoginServlet extends HttpServlet {
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
 			
+			//running password user entered through encryption tool
 			Encryption encrypted = new Encryption();
 			String encryptedPassword = encrypted.encrypt(password);
 			
+			//Running query to pull up user
 			LoginQuery lq = new LoginQuery("srcus_master", "root", "root");
+			//Authenticating that the email and password is correct
 			User user = lq.authenticateUser(email, encryptedPassword);
 			
-			if (user != null){
+			//This checks to see if a user has an empty security question field. If it is empty, then it is their first time logging in and they need to set it and change their password
+			boolean emptyAnswer;
+			CheckAnswerQuery caq = new CheckAnswerQuery("srcus_master", "root", "root");
+			emptyAnswer = caq.checkEmptyAnswer(email);
+			System.out.println("Empty security answer:" + emptyAnswer);
+			
+			//check to see if user exists
+			if (user != null && emptyAnswer == false){
 				session.invalidate();
 				session=request.getSession(true);
 				session.setAttribute("user", user);
-				//SecurityQuestionQuery checkAnswer = new SecurityQuestionQuery("srcus_master", "root", "root");
-				//checkAnswer.checkEmptyAnswers(email);
 				url="home.jsp";
+			} else if (user != null && emptyAnswer == true){
+				session.invalidate();
+				session=request.getSession(true);
+				session.setAttribute("user", user);
+				url="initialLogin.jsp";
 			} else {
 				String errorMessage = "Error: Unrecognized Email or Password <br>Login attempts remaining: "+(3-(loginAttempts));
 				request.setAttribute("errorMessage", errorMessage);

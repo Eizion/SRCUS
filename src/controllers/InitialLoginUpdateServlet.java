@@ -10,22 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dbHelpers.SecurityQuestionQuery;
+import dbHelpers.UpdateCredsQuery;
 import model.SecurityAnswer;
 import model.User;
+import utilities.Encryption;
 
 /**
- * Servlet implementation class SecurityServlet
+ * Servlet implementation class InitialLoginUpdateServlet
  */
-@WebServlet("/SecurityServlet")
-public class SecurityServlet extends HttpServlet {
+@WebServlet("/InitialLoginUpdateServlet")
+public class InitialLoginUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String url;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SecurityServlet() {
+    public InitialLoginUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,42 +46,35 @@ public class SecurityServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		
+		//Getting variables and whatnot
 		User user = (User) session.getAttribute("user");
 		
-		int s_question1 = Integer.parseInt(request.getParameter("SQ1"));
-		int s_question2 = Integer.parseInt(request.getParameter("SQ2"));
-		int s_question3 = Integer.parseInt(request.getParameter("SQ3"));
-		String s_answer1 = request.getParameter("answer1");
-		String s_answer2 = request.getParameter("answer2");
-		String s_answer3 = request.getParameter("answer3");
+		int s_question = Integer.parseInt(request.getParameter("sq"));
+		String s_answer = request.getParameter("answer");
+		String password = request.getParameter("password");
 		
-		SecurityAnswer sa1 = new SecurityAnswer();
+		Encryption pwd = new Encryption();
+		String encryptedPass = pwd.encrypt(password);
 		
-		sa1.setSq_id(s_question1);
-		sa1.setUser_id(user.getId());
-		sa1.setAnswer(s_answer1);
+		//Setting security question and answer for user
+		SecurityAnswer sa = new SecurityAnswer();
 		
-		SecurityAnswer sa2 = new SecurityAnswer();
+		sa.setSq_id(s_question);
+		sa.setUser_id(user.getId());
+		sa.setAnswer(s_answer);
 		
-		sa2.setSq_id(s_question2);
-		sa2.setUser_id(user.getId());
-		sa2.setAnswer(s_answer2);
+		UpdateCredsQuery ucq = new UpdateCredsQuery ("srcus_master", "root", "root");
 		
-		SecurityAnswer sa3 = new SecurityAnswer();
+		ucq.addAnswers(sa);
 		
-		sa3.setSq_id(s_question3);
-		sa3.setUser_id(user.getId());
-		sa3.setAnswer(s_answer3);
+		//Update password
+		String email = user.getEmail();
+		ucq.updatePassword(encryptedPass, email);
 		
-		SecurityQuestionQuery questionQuery = new SecurityQuestionQuery ("srcus_master", "root", "root");
-		
-		questionQuery.addAnswers(sa1);
-		questionQuery.addAnswers(sa2);
-		questionQuery.addAnswers(sa3);
-		
-		String message = "You have successfully updated your security questions.";
+		//setting success message and url for redirect
+		String message = "You have successfully updated your security question and password.";
 		request.setAttribute("message", message);
-		url = "settings.jsp";
+		url = "home.jsp";
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
