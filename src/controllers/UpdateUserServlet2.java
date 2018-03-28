@@ -8,21 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import dbHelpers.ReadUserQuery;
+import dbHelpers.UpdateUserQuery;
+import model.User;
 
 /**
- * Servlet implementation class SearchUserServlet
+ * Servlet implementation class UpdateUserServlet2
  */
-@WebServlet({ "/SearchUserServlet", "/search" })
-public class SearchUserServlet extends HttpServlet {
+@WebServlet({ "/UpdateUserServlet2", "/updateUser2" })
+public class UpdateUserServlet2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchUserServlet() {
+    public UpdateUserServlet2() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,17 +40,26 @@ public class SearchUserServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
 		
-		//Create new ReadUserQuery Object
-		ReadUserQuery ruq = new ReadUserQuery();
+		int user_id = Integer.parseInt(request.getParameter("id"));
+		String email = request.getParameter("email");
+		String fName = request.getParameter("fName");
+		String lName = request.getParameter("lName");
+		int role = Integer.parseInt(request.getParameter("role"));
 		
-		//get table
-		ruq.doRead();
-		String table = ruq.getHTMLTable();
+		User user = new User();
+		user.setId(user_id);
+		user.setEmail(email);
+		user.setfName(fName);
+		user.setlName(lName);
+		user.setRole(role);
 		
-		request.setAttribute("table", table);
-		String url = "/users.jsp";
+		UpdateUserQuery uuq = new UpdateUserQuery();
+		uuq.updateUser(user);
+		
+		String message = "You have successfully updated the user.";
+		request.setAttribute("message", message);
+		String url="/search";
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);

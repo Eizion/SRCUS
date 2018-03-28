@@ -8,21 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import dbHelpers.ReadUserQuery;
+import model.User;
 
 /**
- * Servlet implementation class SearchUserServlet
+ * Servlet implementation class UpdateUsrServlet
  */
-@WebServlet({ "/SearchUserServlet", "/search" })
-public class SearchUserServlet extends HttpServlet {
+@WebServlet({ "/UpdateUsrServlet", "/update2" })
+public class UpdateUsrServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchUserServlet() {
+    public UpdateUsrServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,17 +40,18 @@ public class SearchUserServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
 		
-		//Create new ReadUserQuery Object
+		int user_id = Integer.parseInt(request.getParameter("user_id"));
+		
 		ReadUserQuery ruq = new ReadUserQuery();
 		
-		//get table
-		ruq.doRead();
-		String table = ruq.getHTMLTable();
+		ruq.readUser(user_id);
 		
-		request.setAttribute("table", table);
-		String url = "/users.jsp";
+		User updatedUser = ruq.getUser();
+		
+		request.setAttribute("updatedUser", updatedUser);
+		
+		String url = "/updateForm.jsp";
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);

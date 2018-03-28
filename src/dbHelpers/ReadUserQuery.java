@@ -13,27 +13,11 @@ public class ReadUserQuery {
 	private Connection connection;
 	private ResultSet results;
 	
-	public ReadUserQuery(String dbName, String uname, String pwd) {
-		
-		String url = "jdbc:mysql://localhost:3306/" + dbName;
-		
-		// set up drive
-		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			this.connection = DriverManager.getConnection(url, uname, pwd);
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	private User user = new User();
+	private int user_id;
+	
+	public ReadUserQuery() {
+		connection = MyDbConnection.getConnection();
 	}
 
 	public void doRead() {
@@ -92,7 +76,7 @@ public class ReadUserQuery {
 				}
 				table += "</td>";
 				table += "<td>";
-					table += "<a href=update?user_id=" + user.getId() + ">update</a>";
+					table += "<a href=update2?user_id=" + user.getId() + ">update</a>";
 				table += "</td>";
 				table += "</tr>";
 				
@@ -106,6 +90,37 @@ public class ReadUserQuery {
 		
 		return table;
 		
+	}
+	
+	public void readUser(int user_id) {
+		String query = "select user_id, email, fName, lName, role from user where user_id=?";
+		
+		this.user_id = user_id;
+		
+		try {
+			PreparedStatement ps = connection.prepareStatement(query);
+			
+			ps.setInt(1, this.user_id);
+			
+			this.results = ps.executeQuery();
+			
+			this.results.next();
+			
+			user.setId(this.results.getInt(1));
+			user.setEmail(this.results.getString("email"));
+			user.setfName(this.results.getString("fName"));
+			user.setlName(this.results.getString("lName"));
+			user.setRole(this.results.getInt("role"));
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public User getUser(){
+		return this.user;
 	}
 	
 	
