@@ -51,8 +51,7 @@ public class EditEvaluationServlet extends HttpServlet {
 		Evaluation eval = (Evaluation) session.getAttribute("eval");
 		Question[] container = (Question[])session.getAttribute("questionSet");
 		int questionNum = (Integer)session.getAttribute("questionNum");
-		Question oldQuestion = container[questionNum-1];
-		String oldQuesType = oldQuestion.getQuestionType();
+		UpdateQuestion uq = new UpdateQuestion("srcus_master", "root", "root");
 		
 		boolean last = false;
 		ArrayList<String> choices = new ArrayList<String>();
@@ -70,7 +69,6 @@ public class EditEvaluationServlet extends HttpServlet {
 		String clicked = request.getParameter("submit");
 		
 		if(clicked.equals("Delete Question")){                // in case of delete question
-			UpdateQuestion uq = new UpdateQuestion("srcus_master", "root", "root");
 			uq.doDelete(eval, questionNum, questionType);
 			uq.updateTable(eval, questionNum ,container.length); //update table after delete
 			RetrieveQuestion re = new RetrieveQuestion("srcus_master", "root", "root");
@@ -96,7 +94,7 @@ public class EditEvaluationServlet extends HttpServlet {
 		}else {
 			//in case of update question 
 			//create a connection to database and update entries
-			UpdateQuestion uq = new UpdateQuestion("srcus_master", "root", "root");
+			
 			uq.updateQuestion(question, questionType, eval, questionNum);
 			
 				if(questionType.equals("giveAnswer")){
