@@ -27,13 +27,13 @@
 
 			
 				
-					<div style="padding-bottom: 15px;"><span>Email</span><span style="padding-left: 31px;"> <input type="text" name="email" required /></span></div>
+					<div style="padding-bottom: 15px;"><span>Email</span><span style="padding-left: 31px;"> <input class="form-control" type="text" name="email" required /></span></div>
 				
 				
-					<div style="padding-bottom: 10px;"><span><label>Password</label></td> <input type="password" name="password" required /></span></div>
+					<div style="padding-bottom: 10px;"><span><label>Password</label></td> <input class="form-control" type="password" name="password" required /></span></div>
 				
 				
-					<input style="padding-top: 0px;padding-bottom:  0px;" class="btn btn-primary" type="submit" value="Login">
+					<input style="padding-top: 0px;padding-bottom:  0px;" class="btn btn-primary " type="submit" value="Login">
 					<a style="margin-left: 57px;" href="forgotpassword.jsp">Forgot Password</a>
 				${errorMessage}
 		</form>
