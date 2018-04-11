@@ -44,7 +44,8 @@ public class UpdateCourseServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//retrieve parameters from the form
 		HttpSession session = request.getSession();
-		String oldCourseID = (String)session.getAttribute("oldCourseID");
+		Course oldCourse = (Course)session.getAttribute("course");
+		String oldCourseID = oldCourse.getCourseID();
 		String courseID = request.getParameter("courseID");
 		String courseName= request.getParameter("courseName");
 		Double creditHr = Double.parseDouble(request.getParameter("creditHr"));

@@ -8,6 +8,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 
 
@@ -50,6 +53,25 @@ public class SaveAnswer {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
+	}
+	
+	public void finalSubmit(int evalID, String studentID) {
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		format = format.withLocale( Locale.US );
+		LocalDate submissionDate = LocalDate.now();
+		String query ="update  Assignments set Status =?, SubmissionDate = ? where EvalID = ? and StudentID = ? ";
+		try {
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setString(1, "completed");
+			ps.setDate(2, java.sql.Date.valueOf(submissionDate));
+			ps.setInt(3, evalID);
+			ps.setString(4, studentID);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		
 	}
 	
 	public String getFeedback(int evalID, int questionNum, String studentID) {

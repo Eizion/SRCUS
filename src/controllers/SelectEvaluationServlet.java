@@ -54,7 +54,7 @@ public class SelectEvaluationServlet extends HttpServlet {
 		String term = request.getParameter("term");
 		String submit = request.getParameter("submit");
 		CreateEvaluation ce = new CreateEvaluation("srcus_master", "root", "root");
-		UpdateQuestion uq = new UpdateQuestion("srcus_master", "root", "root");
+		UpdateQuestion uq = new UpdateQuestion("srcus_master", "root", "Tsega12!");
 		
 		//Check to see if the evaluation already exists 
 		//if it exists it returns the evaluation if not it returns null
@@ -70,51 +70,62 @@ public class SelectEvaluationServlet extends HttpServlet {
 			//Retrieve the questions for the evaluation
 			RetrieveQuestion re = new RetrieveQuestion("srcus_master", "root", "root");
 			Question[] container = re.getquestion(existing); 
-			if (container.length < questionNum && !submit.equals("Delete Evaluation")) {
-				message = "There are no questions for this evaluation. Please try deleting the evaluation and creating a new one.";
-				url="/editEvaluation.jsp";
-			}
-			 if (container.length < questionNum && submit.equals("Delete Evaluation")) { // deleting evaluation that has no questions
+			if (container.length < questionNum) {
+					if(!submit.equals("Delete Evaluation")) {
+					message = "There are no questions for this evaluation. Please try deleting the evaluation and creating a new one.";
+					url="/editEvaluation.jsp";
+				}
+					else if (submit.equals("Delete Evaluation")) { // deleting evaluation that has no questions
 				  	uq.deleteEvaluation(existing);
 				  	message ="The evaluation was successfully deleted";
 					url="/editEvaluation.jsp";
+					}
 			}
 			else {
 				if(container.length == questionNum){
-				last = true; // question is last question
-				{
-			HttpSession session = request.getSession();
-			Question current = container[questionNum-1];
-			session.setAttribute("eval", existing);
-			session.setAttribute("questionSet" , container);
-			session.setAttribute("questionNum", questionNum);
-			request.setAttribute("current", current);
-			request.setAttribute("last", last);
-			request.setAttribute("message", message);
-			if(submit.equals("Open Evaluation")) {
-				url = "/loadEvaluation.jsp";
-			}else if(submit.equals("Edit Evaluation")){
-				url = "/modifyEvaluation.jsp";
-			}
-			else if(submit.equals("Delete Evaluation")) {
-				if(container.length > 0) {
-				for(int i =0; i < container.length; i++) {
-					questionNum = i+1;
-					String questionType = container[i].getQuestionType();
-					uq.doDelete(existing, questionNum, questionType);
+					last = true; // question is last question
+				 }
+					HttpSession session = request.getSession();
+					Question current = container[questionNum-1];
+					session.setAttribute("eval", existing);
+					session.setAttribute("questionSet" , container);
+					session.setAttribute("questionNum", questionNum);
+					request.setAttribute("current", current);
+					request.setAttribute("last", last);
+					request.setAttribute("message", message);
+					if(submit.equals("Open Evaluation")) {
+						url = "/loadEvaluation.jsp";
+					}else if(submit.equals("Edit Evaluation")){
+						url = "/modifyEvaluation.jsp";
+					}
+					else if(submit.equals("Delete Evaluation")) {
+						if(container.length > 0) {
+							for(int i =0; i < container.length; i++) {
+								questionNum = i+1;
+								String questionType = container[i].getQuestionType();
+								uq.doDelete(existing, questionNum, questionType);
+							}
+						}
+						uq.deleteEvaluation(existing);
+						String confirm ="The evaluation was successfully deleted";
+						request.setAttribute("message", confirm);
+						url="/editEvaluation.jsp";
+					}
+					else if(submit.equals("Assign Students")) {
+						session.setAttribute("courseID", courseID);
+						session.setAttribute("year", year);
+						session.setAttribute("term", term);
+						url="/assignStudentEvaluation.jsp";
+					}
+					else if(submit.equals("Undo Assigned Students")) {
+						session.setAttribute("courseID", courseID);
+						session.setAttribute("year", year);
+						session.setAttribute("term", term);
+						url="/undoAssignedStudentEvaluation.jsp";
+					}
 				}
-				}
-				uq.deleteEvaluation(existing);
-				String confirm ="The evaluation was successfully deleted";
-				request.setAttribute("message", confirm);
-				url="/editEvaluation.jsp";
 			}
-		}
-	}
-  } 
-}		
-		
-		request.setAttribute("message", message);
+ 		request.setAttribute("message", message);
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
 	}

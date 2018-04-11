@@ -69,7 +69,7 @@ public class SaveAnswersServlet extends HttpServlet {
 				last = true;
 			}
 			//the next question isn't the last question
-			request.setAttribute("last", last);
+			session.setAttribute("last", last);
 			Question current = container[questionNum-1];
 			session.setAttribute("questionNum", questionNum);
 			request.setAttribute("current", current);
@@ -77,9 +77,11 @@ public class SaveAnswersServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);
 		}else if(questionNum > container.length){
+			sa.finalSubmit(eval.getEvalID(), studentID); // to set the status of the student's evaluation assignment to completed
 			session.removeAttribute("questionNum");
 			session.removeAttribute("questionSet");
 			session.removeAttribute("eval");
+			session.removeAttribute("last");
 			url ="/evaluation.jsp";
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);

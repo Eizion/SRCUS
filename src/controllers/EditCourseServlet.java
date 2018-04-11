@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -11,10 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dbHelpers.Assignments;
 import dbHelpers.CheckCourse;
-import dbHelpers.RetrieveInstructors;
 import model.Course;
+import model.Evaluation;
 import model.Instructor;
+import model.Student;
 
 /**
  * Servlet implementation class EditCourseServlet
@@ -23,7 +26,7 @@ import model.Instructor;
 
 public class EditCourseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	Assignments ri = new Assignments("srcus_master", "root", "root");   
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -36,8 +39,25 @@ public class EditCourseServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doPost(request , response);
+		String level = request.getParameter("level");
+		ArrayList<Student> students = new ArrayList<Student>();
+		if(level.equals("1") || level.equals("2") || level.equals("3")) {
+			students = ri.retrieveSelectStudents(level);
+		}else if(level.equals("all")) {
+			students = ri.retrieveAllStudents();
+		}
+		response.setContentType("text/html");
+		PrintWriter out=response.getWriter();
+		out.write("<table>");
+    	for(int i = 0; i < students.size(); i++) {
+    		Student current= students.get(i);
+    		out.write("<tr><td>");
+    		out.write("<input type='checkbox' name='student' value=" +current.getStudentID()+" />" + current.getfName()+" "+ current.getlName());
+    		out.write("</td><tr>");
+    		
+    		}
+    	out.write("</table>");
+		
 	}
 
 	/**
@@ -47,8 +67,12 @@ public class EditCourseServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String message = "";
 		String url = "";
+		HttpSession session = request.getSession();
 		String courseID = request.getParameter("courseID");
 		String submit = request.getParameter("submit");
+		CheckCourse check= new CheckCourse("srcus_master", "root", "root");
+		Course selected = check.doCheckID(courseID);
+		session.setAttribute("course", selected);
 		if(submit.equals("Edit")) {
 		if(courseID == null){
 			message="Please select a course to edit.";
@@ -56,26 +80,24 @@ public class EditCourseServlet extends HttpServlet {
 			url="/selectCourse.jsp";
 		}
 		else{
-			CheckCourse check= new CheckCourse("srcus_master", "root", "root");
-			Course selected = check.doCheckID(courseID);
-			request.setAttribute("course", selected);
 			url="/editCourse.jsp";
-			
-		}
+			}
 		}
 		else if(submit.equals("Assign Instructors")) {
-			CheckCourse check= new CheckCourse("srcus_master", "root", "root");
-			Course selected = check.doCheckID(courseID);
-			RetrieveInstructors ri = new RetrieveInstructors("srcus_master", "root", "root");
-			ArrayList<Instructor> instrList = ri.doRetrieve();
-			HttpSession session = request.getSession();
-			session.setAttribute("course", selected);
+			Assignments ri = new Assignments("srcus_master", "root", "root");
+			ArrayList<Instructor> instrList = ri.retrieveInstructors();  //retrieve the current list of instructors for assignment
 			request.setAttribute("instructors", instrList);
 			url="assignInstructor.jsp";
 		}
 		else if(submit.equals("Assign Students")) {
+			url="assignStudents.jsp";
 		}
-		
+		else if(submit.equals("Undo Assigned Instructors")) {
+			url="undoInstructorAssign.jsp";
+		}
+		else if(submit.equals("Undo Assigned Students")) {
+			url="undoStudentAssign.jsp";
+		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
 	}
