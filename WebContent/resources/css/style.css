@@ -39,7 +39,7 @@
     height: 20%;
     padding: 20px;
     border-radius: 15px;
-    margin-left: 40px;
+	margin-left: 0px; 
     margin-bottom: 30px;
 }
 }
@@ -58,4 +58,26 @@
     height: auto;
 }
 }
+.brand-image{
+width: 100px;
+height: auto;
+}
 
+@media only screen and (max-width:768px) {
+.header{
+	width:108%;
+}
+}
+
+.wrapper{
+	text-align:center;
+}
+#pic1{
+	 background-image: url("resources/images/manageusers.png");
+}
+#pic2{
+	 background-image: url("resources/images/icons8-exam-50.png");
+}
+#pic3{
+	 background-image: url("resources/images/settings.png");
+}

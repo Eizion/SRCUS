@@ -14,9 +14,12 @@
 <title>Southeast Regional Credit Union Schools Web Portal - Home</title>
 </head>
 <body>
+<div class="container" >
 <div class="header">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Southeast Regional Credit Union Schools Web Portal</a>
+<div>
+  <a class="navbar-brand" href="#"><img class="brand-image" src="resources/images/ScrusBrand.png" ></a>
+  </div>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -34,20 +37,18 @@
 	</div>
 	
 	<div class="wrapper">
-	
-		<h1>Home</h1>
 		${message}
 	
 		<h2>Welcome, <c:out value="${user.fName}!!!" /></h2>
 		<div class="row center">
 		<c:if test = "${user.role == 1 }">
-				<div class="homepage-icons"><a href="manage.jsp">Manage Users</a></div>
+				<div id="pic1" class="homepage-icons"><a href="manage.jsp">Manage Users</a></div>
 		</c:if>
-				<div class="homepage-icons"><a href="courseevaluation.jsp">Course Evaluations</a></div>
-				<div class="homepage-icons"><a href="settings.jsp">User Settings</a></div>
+				<div id="pic2" class="homepage-icons"><a href="courseevaluation.jsp">Course Evaluations</a></div>
+				<div id="pic3" class="homepage-icons"><a href="settings.jsp">User Settings</a></div>
 	</div>
 	
 	</div>
-
+</div>
 </body>
 </html>
