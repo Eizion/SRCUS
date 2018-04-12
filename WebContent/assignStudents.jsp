@@ -2,9 +2,7 @@
     pageEncoding="ISO-8859-1"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix = "sql" uri = "http://java.sun.com/jsp/jstl/sql" %>
-    <%
-   String message = (String)request.getAttribute("message");
-   %>
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,10 +11,45 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<meta charset="utf-8" />
+<title>Southeast Regional Credit Union Schools Web Portal - Assign Student</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" src="resources/js/evaluations.js"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Southeast Regional Credit Union Schools Web Portal - Create Evaluation</title>
+		
+<script type="text/javascript">
+		//function to generate the options range for the year input box
+		window.onload=function(){
+			for(var i=2018; i<=2020; i++){
+    			var select = document.getElementById("year");
+    			var option = document.createElement("OPTION");
+    			select.options.add(option);
+   			 	option.text = i;
+    			option.value = i;
+			}
+		};
+		
+		function getStudents(level){
+			if(level != ""){
+			var xhttp;
+			if (window.XMLHttpRequest){
+				  xhttp=new XMLHttpRequest();
+			  }
+			else{
+			  xhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			  }
+			xhttp.onreadystatechange=function(){
+			    if (xhttp.readyState == 4 && xhttp.status == 200) {
+			    	if(xhttp.response == null){
+			    		window.alert("There are currently no students at this level.");
+			    	}
+			    document.getElementById("students").innerHTML = xhttp.responseText;
+			    }
+			};
+			  xhttp.open("GET", "editCourse?level="+level , true);
+			  xhttp.send();
+			}
+		}
+		
+		</script>
 </head>
 <body style="background-color: dodgerblue;">
 <div class="header">
@@ -37,56 +70,39 @@
   </div>
 </nav>
 	</div>
-		<h3>Evaluation Information</h3>
-		
-		<form name="evaluation" action="createEvaluation" method="post">
-    			<table>
-    				<tr>
-    					<td><label>Instructor Name:</label></td>
-     					<td><select name="instrID" id="instrID" required onChange="getCourse(this.value);" >
-							
-							</select>
-						</td>
-     				</tr>
-     				<tr>
-     					<td><label>Course Name:</label></td>
-     					<td><select name="courseID" id="courseID" required>
-							<option value="">---Course Name---</option>
-							</select>
-						</td>
-     				</tr>
-     				<tr>
-     					<td><label>Year:</label></td>
-     					<td><select name="year" id="year" required>
+	<h1>Southeast Regional Credit Union Schools Web Portal</h1>
+		<h3>Assign Students for the course ${course.courseID} ${course.courseName}</h3>
+		<form name="assignStudents" action="assignServlet" method="post">
+		<table>
+				<tr>
+     					<td><label>Year:</label>
+     					<select name="year" id="year" required>
      						<option value="" selected="selected"></option>
      						</select>
      					</td>
-     				</tr>
-     				<tr>
-	    				<td><label>Term:</label></td>
-     					<td><select name="term" id="term" required>
+	    				<td><label>Term:</label>
+     					<select name="term" id="term" required>
      						<option value="" selected="selected"></option>
      						<option value="spring">Spring Semester</option>
      						<option value="fall">Fall Semester</option>
      						<option value="summer">Summer Semester</option>
-     						</select>
+     					</select>
      					</td>
      				</tr>
      				<tr>
-	    				<td><label>Activation Date:</label></td>
-     					<td><input type="date" name="activeDate" required/></td>
+     					<td><label>Select the year of students</label>
+     					<select name="studentYear" id="studentYear" onChange="getStudents(this.value);" required>
+     						<option value="" selected="selected"></option>
+     						<option value="1">first year</option>
+     						<option value="2">second year</option>
+     						<option value="3">third year </option>
+     						<option value="all">all students</option>
+     					</select>
      				</tr>
-     				<tr>
-	    				<td><label>Submission Deadline:</label></td>
-     					<td><input type="date" name="submDate" required/></td>
-     				</tr>
-     				<tr>
-     					<td><input type="submit" name="submit" value="save and Continue"></td>
-     					<td><input type="reset" name="reset" value="Reset" /></td>
-     					</tr>
-     			</table>
-     			${message}
-  		</form>
-
+		</table>
+		
+		<div id="students"></div>
+		<input type="submit" name="submit" value="Assign Students" />
+		</form>
 </body>
 </html>

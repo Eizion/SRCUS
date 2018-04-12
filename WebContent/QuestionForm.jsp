@@ -16,77 +16,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <meta charset="utf-8" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="resources/js/QuestionForm.js"></script>
 <title>Southeast Regional Credit Union Schools Web Portal - Create Evaluation</title>
-    <script type="text/javascript">
-        var counter=1;
-        function addChoices(selected){
-             var qType = document.getElementById("questionType").value;
-             var p = document.getElementById("choices");
-             var newElement = document.createElement("input");
-             var label = document.createElement("label");
-             var newElem = document.getElementById(i);
-             var lable1 = document.getElementById("label1");
-            if(qType == "chooseOne" || qType == "multiSelect"){
-                if(counter == 1){
-                 label.setAttribute("id", "label1");
-                 label.innerHTML ="</br></br><label>Choice "+counter+ " " +"</label>";
-                 newElement.setAttribute("id", counter);
-                 newElement.setAttribute("name", counter);
-                 newElement.setAttribute("onChange","newChoices(this.value)");
-                 p.appendChild(label);
-                 p.appendChild(newElement);
-                 counter++
-                }else if(counter > 1){
-                    for (var i =1; i <= counter; i++){
-                        
-                        newElem.parentNode.removeChild(newElem);
-                        label1.parentNode.removeChild(label1);
-                        counter--;
-                    }
-                     label.setAttribute("id", "label1");
-                     label.innerHTML ="</br></br><label>Choice "+counter+" </label>";
-                     newElement.setAttribute("id", counter);
-                     newElement.setAttribute("name", counter);
-                     newElement.setAttribute("onChange","newChoices(this.value)");
-                     p.appendChild(label);
-                     p.appendChild(newElement);
-                     counter++;
-                }
-            }else {
-                for (var i =1; i <= counter; i++){
-                    newElem.parentNode.removeChild(newElem);
-                    label1.parentNode.removeChild(label1);
-                    counter--;
-                    }
-                }
-        }
-        
-        function newChoices(entry){
-            if(entry !== "" && document.getElementById(counter-1).value !== ""){
-            var p = document.getElementById("choices");
-             var newElement = document.createElement("input");
-             var label = document.createElement("label");
-             label.setAttribute("id", "label1");
-             label.innerHTML ="</br></br><label>Choice "+counter+" </label>";
-             newElement.setAttribute("id", counter);
-             newElement.setAttribute("name", counter);
-             newElement.setAttribute("onChange","newChoices(this.value)");
-             p.appendChild(label);
-             p.appendChild(newElement);
-             counter++;
-            }
-        }
-        
-        function doReset(){
-                for (var i =1; i <= counter; i++){
-                    var newElem = document.getElementById(i)
-                    var lable1 = document.getElementById("label1");
-                    newElem.parentNode.removeChild(newElem);
-                    label1.parentNode.removeChild(label1);
-                    counter--;
-        }
-    }
-    </script>
 </head>
 <body style="background-color: dodgerblue;">
 <div class="header">
@@ -107,25 +39,25 @@
   </div>
 </nav>
 	</div>
-        <h3>Evaluation Questions</h3>
-        <form name="evalQuestions" action="addQuestions" method="post">
-            <label>Enter question number <%=questionNum %></label></br></br>
-            <textarea name="question" value="" rows="5" cols="40" required></textarea></br></br>
-        
-            <label>Type of question</label>
-                <select name="questionType"  id="questionType"  onChange="addChoices(this.value);" required>
-                    <option value=""></option>
-                    <option value="chooseOne">Choose one</option>
-                    <option value="multiSelect">Multi select</option>
-                    <option value="giveAnswer">Give answer</option>
-                </select> </br></br>
-        
-            <div id="choices"></div></br>
-                <input type="submit" name= "submit" value="Save & Continue" />
-                <input type="submit" name= "submit" value="Finish" />
-        
-        <input type="reset" name="reset" value="Reset" onClick="doReset()"/>
-    </form>   
-         
+		<h3>Evaluation Questions</h3>
+		<form name="evalQuestions" action="addQuestions" method="post">
+			<label>Enter question number <%=questionNum %></label></br></br>
+			<textarea name="question" value="" rows="5" cols="40" required></textarea></br></br>
+		
+			<label>Type of question</label>
+				<select name="questionType"  id="questionType"  onChange="addChoices(this.value);" required>
+					<option value=""></option>
+					<option value="chooseOne">Choose one</option>
+					<option value="multiSelect">Multi select</option>
+					<option value="giveAnswer">Give answer</option>
+				</select> </br></br>
+		
+			<div id="choices"></div></br>
+				<input type="submit" name= "submit" value="Save & Continue" onClick="return true;"/>
+				<input type="submit" name= "submit" value="Finish" onclick="return true;"/>
+		
+		<input type="reset" name="reset" value="Reset" onClick="doReset()"/>
+	</form>	
+		 
 </body>
 </html>
