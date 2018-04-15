@@ -17,18 +17,8 @@ public class ForgotPasswordQuery {
 	private SecurityAnswer securityAnswer = new SecurityAnswer();
 	private SecurityQuestion securityQuestion = new SecurityQuestion();
 	
-	public ForgotPasswordQuery (String dbName, String uname, String pwd) {
-
-		String url = "jdbc:mysql://localhost:3306/" + dbName;
-		
-		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			this.connection = DriverManager.getConnection(url, uname, pwd);
-			
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public ForgotPasswordQuery () {
+		connection = MyDbConnection.getConnection();
 	}
 	
 	public void getAnswers(int user_id) {

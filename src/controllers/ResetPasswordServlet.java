@@ -60,7 +60,7 @@ public class ResetPasswordServlet extends HttpServlet {
 			Encryption encrypted = new Encryption();
 			String encryptedNewPass = encrypted.encrypt(newPassword1);
 			
-			UpdateCredsQuery ucq = new UpdateCredsQuery ("srcus_master", "root", "root");
+			UpdateCredsQuery ucq = new UpdateCredsQuery ();
 			ucq.updatePassword(encryptedNewPass, email);
 			errorMessage = "You have successfully updated password.";
 			request.setAttribute("errorMessage", errorMessage);

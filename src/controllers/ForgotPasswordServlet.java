@@ -62,7 +62,7 @@ public class ForgotPasswordServlet extends HttpServlet {
 			request.setAttribute("email", email);
 			int user_id = forgotUser.getId();
 			
-			ForgotPasswordQuery fp = new ForgotPasswordQuery("srcus_master", "root", "root");
+			ForgotPasswordQuery fp = new ForgotPasswordQuery();
 			fp.getAnswers(user_id);
 			SecurityAnswer securityAnswer = fp.getSecurityAnswer();
 			int sq_id = securityAnswer.getSq_id();

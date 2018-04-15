@@ -13,13 +13,13 @@ public class LoginQuery {
 	private PreparedStatement authenticateUserStatement;
 	private Connection connection;
 	
-	public LoginQuery(String dbName, String uname, String pwd) {
+	public LoginQuery() {
 		
-		String url = "jdbc:mysql://localhost:3306/" + dbName;
+		//String url = "jdbc:mysql://localhost:3306/" + dbName;
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			this.connection = DriverManager.getConnection(url, uname, pwd);
+			connection = MyDbConnection.getConnection();
 			
 			authenticateUserStatement = connection.prepareStatement("select * from user where email = ? and password = ?");
 			

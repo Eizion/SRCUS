@@ -10,20 +10,8 @@ public class CheckAnswerQuery {
 	
 	private Connection connection;
 	
-	public CheckAnswerQuery(String dbName, String uname, String pwd) {
-		
-		String url = "jdbc:mysql://localhost:3306/" + dbName;
-		
-		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			this.connection = DriverManager.getConnection(url, uname, pwd);
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public CheckAnswerQuery() {
+		connection = MyDbConnection.getConnection();
 	}
 	
 	public boolean checkEmptyAnswer(String email) {

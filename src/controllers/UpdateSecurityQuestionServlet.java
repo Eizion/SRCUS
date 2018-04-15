@@ -51,7 +51,7 @@ public class UpdateSecurityQuestionServlet extends HttpServlet {
 		String answer = request.getParameter("answer");
 		int user_id = user.getId();
 		
-		UpdateSecurityQuestionQuery usq = new UpdateSecurityQuestionQuery("srcus_master", "root", "root");
+		UpdateSecurityQuestionQuery usq = new UpdateSecurityQuestionQuery();
 		usq.updateAnswer(sq_id, answer, user_id);
 		
 		String message = "You have successfully updated your security question.";

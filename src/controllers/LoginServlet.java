@@ -76,13 +76,13 @@ public class LoginServlet extends HttpServlet {
 			String encryptedPassword = encrypted.encrypt(password);
 			
 			//Running query to pull up user
-			LoginQuery lq = new LoginQuery("srcus_master", "root", "root");
+			LoginQuery lq = new LoginQuery();
 			//Authenticating that the email and password is correct
 			User user = lq.authenticateUser(email, encryptedPassword);
 			
 			//This checks to see if a user has an empty security question field. If it is empty, then it is their first time logging in and they need to set it and change their password
 			boolean emptyAnswer;
-			CheckAnswerQuery caq = new CheckAnswerQuery("srcus_master", "root", "root");
+			CheckAnswerQuery caq = new CheckAnswerQuery();
 			emptyAnswer = caq.checkEmptyAnswer(email);
 			System.out.println("Empty security answer:" + emptyAnswer);
 			

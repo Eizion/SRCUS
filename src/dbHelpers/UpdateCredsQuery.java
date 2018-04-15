@@ -11,20 +11,8 @@ public class UpdateCredsQuery {
 	
 private Connection connection;
 	
-	public UpdateCredsQuery(String dbName, String uname, String pwd) {
-		
-		String url = "jdbc:mysql://localhost:3306/" + dbName;
-		
-		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			this.connection = DriverManager.getConnection(url, uname, pwd);
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public UpdateCredsQuery() {
+		connection = MyDbConnection.getConnection();
 	}
 	
 	public void addAnswers(SecurityAnswer answer) {

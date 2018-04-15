@@ -71,7 +71,7 @@ public class UpdatePasswordServlet extends HttpServlet {
 			url="changePassword.jsp";
 		} 
 		if (oldPassword1.compareTo(encryptedPassword2) == 0 && newPassword1.compareTo(newPassword2) == 0){
-			UpdateCredsQuery ucq = new UpdateCredsQuery ("srcus_master", "root", "root");
+			UpdateCredsQuery ucq = new UpdateCredsQuery ();
 			ucq.updatePassword(encryptedNewPass, email);
 			String message = "You have successfully updated password.";
 			request.setAttribute("message", message);

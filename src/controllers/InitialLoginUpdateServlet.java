@@ -63,7 +63,7 @@ public class InitialLoginUpdateServlet extends HttpServlet {
 		sa.setUser_id(user.getId());
 		sa.setAnswer(s_answer);
 		
-		UpdateCredsQuery ucq = new UpdateCredsQuery ("srcus_master", "root", "root");
+		UpdateCredsQuery ucq = new UpdateCredsQuery ();
 		
 		ucq.addAnswers(sa);
 		
