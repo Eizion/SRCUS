@@ -67,5 +67,9 @@
 		</form>
 
 	${message}
+	<form name="navigate" action="saveAnswers" method="post">
+        <input type="submit" name="submit" value ="Back" />
+        <input type="submit" name="submit" value="Next" />
+    </form>
 </body>
 </html>

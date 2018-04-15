@@ -32,9 +32,6 @@
 </nav>
 <form name=updateForm action=updateUser2 method=get>
 
-	<label>User ID:</label>
-	<input type=text name=id value="<%= updatedUser.getId() %>" />
-	<br>
 	<label>Email:</label>
 	<input type=text name=email value="<%= updatedUser.getEmail() %>" />
 	<br>
