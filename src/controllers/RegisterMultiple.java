@@ -52,7 +52,7 @@ public class RegisterMultiple extends HttpServlet {
 		Encryption pwd = new Encryption();
 		String encryptedPass = pwd.encrypt(password);
 		
-		CheckUserQuery cu = new CheckUserQuery("srcus_master", "root", "root");
+		CheckUserQuery cu = new CheckUserQuery();
 		User user = cu.checkUser(email);
 		
 		if (user != null){
@@ -68,7 +68,7 @@ public class RegisterMultiple extends HttpServlet {
 			newUser.setlName(lName);
 			newUser.setRole(role);
 			
-			RegisterQuery rq = new RegisterQuery("srcus_master", "root", "root");
+			RegisterQuery rq = new RegisterQuery();
 			
 			rq.doRegister(newUser);
 			

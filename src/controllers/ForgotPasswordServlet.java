@@ -50,7 +50,7 @@ public class ForgotPasswordServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		String email = request.getParameter("email");
-		CheckUserQuery cu = new CheckUserQuery("srcus_master", "root", "root");
+		CheckUserQuery cu = new CheckUserQuery();
 		User forgotUser = cu.checkUser(email);
 		String question = "";
 		
