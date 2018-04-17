@@ -26,7 +26,7 @@ import model.Student;
 
 public class EditCourseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	Assignments ri = new Assignments("srcus_master", "root", "root");   
+	Assignments ri = new Assignments();   
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -70,7 +70,7 @@ public class EditCourseServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String courseID = request.getParameter("courseID");
 		String submit = request.getParameter("submit");
-		CheckCourse check= new CheckCourse("srcus_master", "root", "root");
+		CheckCourse check= new CheckCourse();
 		Course selected = check.doCheckID(courseID);
 		session.setAttribute("course", selected);
 		if(submit.equals("Edit")) {
@@ -84,7 +84,7 @@ public class EditCourseServlet extends HttpServlet {
 			}
 		}
 		else if(submit.equals("Assign Instructors")) {
-			Assignments ri = new Assignments("srcus_master", "root", "root");
+			Assignments ri = new Assignments();
 			ArrayList<Instructor> instrList = ri.retrieveInstructors();  //retrieve the current list of instructors for assignment
 			request.setAttribute("instructors", instrList);
 			url="assignInstructor.jsp";

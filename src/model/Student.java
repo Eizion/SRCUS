@@ -10,7 +10,7 @@ import java.io.Serializable;
  *
  */
 public class Student implements Serializable{
-	private String studentID;
+	private int studentID;
 	private String fName;
 	private String lName;
 	private int year;
@@ -19,7 +19,7 @@ public class Student implements Serializable{
 	 * 
 	 */
 	public Student(){
-		this.studentID = "";
+		this.studentID = 0;
 		this.fName = "";
 		this.lName = "";
 		this.year = 1;
@@ -31,7 +31,7 @@ public class Student implements Serializable{
 	 * @param lName
 	 * @param year
 	 */
-	public Student(String studentID, String fName, String lName, int year) {
+	public Student(int studentID, String fName, String lName, int year) {
 		this.studentID = studentID;
 		this.fName = fName;
 		this.lName = lName;
@@ -42,14 +42,14 @@ public class Student implements Serializable{
 	/**
 	 * @return the studentID
 	 */
-	public String getStudentID() {
+	public int getStudentID() {
 		return studentID;
 	}
 
 	/**
 	 * @param studentID the studentID to set
 	 */
-	public void setStudentID(String studentID) {
+	public void setStudentID(int studentID) {
 		this.studentID = studentID;
 	}
 

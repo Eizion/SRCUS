@@ -23,7 +23,7 @@ import model.Student;
 @WebServlet("/undoAssignServlet")
 public class UndoAssignServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	Assignments ri = new Assignments("srcus_master", "root", "root"); 
+	Assignments ri = new Assignments(); 
 	
     /**
      * @see HttpServlet#HttpServlet()

@@ -19,6 +19,7 @@ import model.Course;
 import model.Evaluation;
 import model.Instructor;
 import model.Student;
+import model.User;
 
 /**
  * Servlet implementation class CreateEvaluationServlet
@@ -43,12 +44,12 @@ public class CreateEvaluationServlet extends HttpServlet {
 		String item = request.getParameter("item");
 		String instrID = "";
 		String courseID = "";
-		Assignments assign = new Assignments("srcus_master", "root", "root");
+		Assignments assign = new Assignments();
 		response.setContentType("text/html");
 		PrintWriter out=response.getWriter();
 		if(item.equals("instructor")) {
 			ArrayList<Instructor> instructor = new ArrayList<Instructor>();
-			instructor = assign.retrieveInstructors();
+			    instructor = assign.retrieveInstructors();
 			String title = "";
         		out.write("<option value=\"\" selected='selected' >---Instructor Name---</option>");
         		for(int i = 0; i < instructor.size(); i++) {
@@ -115,7 +116,7 @@ public class CreateEvaluationServlet extends HttpServlet {
 		String submDate = request.getParameter("submDate");
 		
 		//Create a connection to database and add the info
-		CreateEvaluation ce = new CreateEvaluation("srcus_master", "root", "root");
+		CreateEvaluation ce = new CreateEvaluation();
 		
 		//Check to see if the same evaluation already exists 
 		Evaluation existing = ce.doCheck(instrID, courseID, year, term);
@@ -128,7 +129,7 @@ public class CreateEvaluationServlet extends HttpServlet {
 		url ="/QuestionForm.jsp";
 		HttpSession session = request.getSession();
 		session.setAttribute("eval", eval);
-		session.setAttribute("questionNum", Integer.toString(questionNum));
+		session.setAttribute("questionNum", questionNum);
 		}
 		else{
 		    message = "An evaluation already exists for the selected instructor and course. Please select a different one.";

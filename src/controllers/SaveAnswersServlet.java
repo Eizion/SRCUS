@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import dbHelpers.SaveAnswer;
 import model.Evaluation;
 import model.Question;
+import model.User;
 
 /**
  * Servlet implementation class SaveAnswers
@@ -45,11 +46,50 @@ public class SaveAnswersServlet extends HttpServlet {
 		String answer = "";
 		boolean last= false;
 		String url ="";
+		int studentID = 0;
 		HttpSession session = request.getSession();
 			//get the attributes from the form
 		Evaluation eval = (Evaluation)session.getAttribute("eval");
 		Question[] container = (Question[])session.getAttribute("questionSet");
 		int questionNum = (Integer)session.getAttribute("questionNum");
+		User user = (User) session.getAttribute("user");
+		if(user.getRole() == 2) {
+			studentID = user.getId();
+		}
+		String clicked = request.getParameter("submit");
+		if(clicked.equals("Next")) { // load next question without saving changes made to current question
+			questionNum++;
+			if(questionNum == container.length) {
+				last = true;
+			}
+			if(questionNum > container.length) {
+				url ="/courseevaluation.jsp";
+				}
+			else{
+				request.setAttribute("last", last);
+				Question current = container[questionNum-1];
+				session.setAttribute("questionNum", questionNum);
+				request.setAttribute("current", current);
+				url ="/loadEvaluation.jsp";
+			}
+			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+			dispatcher.forward(request, response);	
+		}
+		else if(clicked.equals("Back")) { //Go back to previous question without saving changes 
+			questionNum--;  
+			if(questionNum < 1) {
+				url="/selectEvaluation.jsp";
+			}else {
+				if(last){last = false;}
+				request.setAttribute("last", last);
+				Question current = container[questionNum-1];
+				session.setAttribute("questionNum", questionNum);
+				request.setAttribute("current", current);
+				url ="/loadEvaluation.jsp";
+			}
+			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+			dispatcher.forward(request, response);
+		}else {
 		String[] result = request.getParameterValues("answer");
 		if(result.length > 1) {
 			for(int i = 0; i < result.length; i++) {
@@ -59,9 +99,9 @@ public class SaveAnswersServlet extends HttpServlet {
 		else {
 			answer = result[0];
 		}
-		String studentID = "5555";   // needs to be edited with real studentID
+		
 		//create a connection to database and save answer
-		SaveAnswer sa = new SaveAnswer("srcus_master", "root", "root");
+		SaveAnswer sa = new SaveAnswer("srcus_master", "root", "Tsega12!");
 		sa.doSave(eval.getEvalID(), questionNum, studentID, answer);
 		questionNum++;
 		if (questionNum <= container.length) {
@@ -82,10 +122,11 @@ public class SaveAnswersServlet extends HttpServlet {
 			session.removeAttribute("questionSet");
 			session.removeAttribute("eval");
 			session.removeAttribute("last");
-			url ="/evaluation.jsp";
+			url ="/courseevaluation.jsp";
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);
 		}
+	}
 	
 	}
 }

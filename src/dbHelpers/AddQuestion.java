@@ -18,16 +18,8 @@ import model.Evaluation;
 public class AddQuestion {
 private Connection connection;
 	
-	public AddQuestion(String dbName, String username, String pwd){
-		String url="jdbc:mysql://localhost:3306/" + dbName;
-	
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			this.connection = DriverManager.getConnection(url, username, pwd);
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public AddQuestion(){
+		connection = MyDbConnection.getConnection();
 	}
 	
 	public void doAddQuestion(String question, String questionType, Evaluation eval, int questionNum) {

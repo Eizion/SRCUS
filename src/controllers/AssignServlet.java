@@ -24,7 +24,7 @@ import model.Student;
 @WebServlet("/assignServlet")
 public class AssignServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	Assignments ri = new Assignments("srcus_master", "root", "root");
+	Assignments ri = new Assignments();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -56,7 +56,7 @@ public class AssignServlet extends HttpServlet {
     		Student current= students.get(i);
     		out.write("<tr><td>");
     		out.write("<input type='checkbox' name='student' value=" +current.getStudentID()+" />" + current.getfName()+" "+ current.getlName());
-    		out.write("</td><tr>");
+    		out.write("</td></tr>");
     		
     		}
     	out.write("</table>");

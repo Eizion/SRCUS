@@ -51,27 +51,58 @@ public class EditEvaluationServlet extends HttpServlet {
 		Evaluation eval = (Evaluation) session.getAttribute("eval");
 		Question[] container = (Question[])session.getAttribute("questionSet");
 		int questionNum = (Integer)session.getAttribute("questionNum");
-		UpdateQuestion uq = new UpdateQuestion("srcus_master", "root", "root");
+		UpdateQuestion uq = new UpdateQuestion();
 		
 		boolean last = false;
 		ArrayList<String> choices = new ArrayList<String>();
-		String url;
+		String url="";
 		int counter = 1;
 		int i=0;
 		
 		while(request.getParameter(Integer.toString(counter)) != null && request.getParameter(Integer.toString(counter)) != ""){ //insert all the choices to a question in an arraylist
 			choices.add(i,request.getParameter(Integer.toString(counter)));
-			System.out.println(request.getParameter(Integer.toString(counter)));
 			counter++;
 			i++;
 		}
 		
 		String clicked = request.getParameter("submit");
-		
-		if(clicked.equals("Delete Question")){                // in case of delete question
+		if(clicked.equals("Next")) { // load next question without saving changes made to current question
+			questionNum++;
+			if(questionNum == container.length) {
+				last = true;
+			}
+			if(questionNum > container.length) {
+				url ="/courseevaluation.jsp";
+				}
+			else{
+				request.setAttribute("last", last);
+				Question current = container[questionNum-1];
+				session.setAttribute("questionNum", questionNum);
+				request.setAttribute("current", current);
+				url ="/modifyEvaluation.jsp";
+			}
+			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+			dispatcher.forward(request, response);	
+		}
+		else if(clicked.equals("Back")) { //Go back to previous question without saving changes 
+			questionNum--;  
+			if(questionNum < 1) {
+				url="/editEvaluation.jsp";
+			}else {
+				if(last){last = false;}
+				request.setAttribute("last", last);
+				Question current = container[questionNum-1];
+				session.setAttribute("questionNum", questionNum);
+				request.setAttribute("current", current);
+				url ="/modifyEvaluation.jsp";
+			}
+			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+			dispatcher.forward(request, response);
+		}
+		else if(clicked.equals("Delete Question")){                // in case of delete question
 			uq.doDelete(eval, questionNum, questionType);
 			uq.updateTable(eval, questionNum ,container.length); //update table after delete
-			RetrieveQuestion re = new RetrieveQuestion("srcus_master", "root", "root");
+			RetrieveQuestion re = new RetrieveQuestion();
 			container = re.getquestion(eval);  //get the new array of questions
 			if(questionNum <= container.length) {
 				if(questionNum == container.length) { //last question in the array
@@ -85,13 +116,22 @@ public class EditEvaluationServlet extends HttpServlet {
 				RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 				dispatcher.forward(request, response);
 			}else if(questionNum > container.length) {
-				url ="/evaluation.jsp";
+				url ="/courseevaluation.jsp";
 				session.removeAttribute("questionNum");
 				RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 				dispatcher.forward(request, response);
 			}
 			
-		}else {
+		}
+		else if(clicked.equals("Add Question")) {//increment question number and call QuestionForm to add extra questions
+			questionNum = questionNum + 1;  
+			session.setAttribute("questionNum", questionNum);
+			url = "/QuestionForm.jsp";
+			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+			dispatcher.forward(request, response);
+			
+		}
+		else {
 			//in case of update question 
 			//create a connection to database and update entries
 			
@@ -120,11 +160,12 @@ public class EditEvaluationServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 		}
 		else if (clicked.equals("Save & Finish")){     //marks the end of the evaluation entry
-			url ="/evaluation.jsp";
+			url ="/courseevaluation.jsp";
 			session.removeAttribute("questionNum");
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);
 		}
+		
 	}
 
 

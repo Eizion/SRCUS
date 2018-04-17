@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.sql.PreparedStatement;
 
 import model.Course;
@@ -12,16 +13,8 @@ public class CheckCourse {
 	private Connection connection;
 	private ResultSet result;
 	
-	public CheckCourse(String dbName, String userName, String pwd){
-		String url = "jdbc:mysql://localhost:3306/" + dbName;
-		 try {
-			Class.forName("com.mysql.jdbc.Driver");
-			this.connection = DriverManager.getConnection(url, userName, pwd);
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		 
+	public CheckCourse(){
+		connection = MyDbConnection.getConnection();
  	}
 
 	public Course doCheckID(String courseID){
@@ -58,5 +51,24 @@ public class CheckCourse {
 		}
 		
 		return course;
+}
+	
+	public ArrayList<Course> getAllCourses(){
+		String query = "select * from Course";
+		Course course = null;
+		ArrayList<Course> container = new ArrayList<Course>();
+		try {
+			PreparedStatement ps = connection.prepareStatement(query);
+			result = ps.executeQuery();
+			while(this.result.next()){
+				course = new Course(result.getString("CourseID"), result.getString("CourseName"), result.getDouble("CreditHr"), result.getString("CourseType"), result.getString("CourseYear"));
+				container.add(course);
+			}
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return container;
 }
 }

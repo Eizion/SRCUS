@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import model.Course;
 import model.Evaluation;
@@ -23,15 +24,8 @@ public class Assignments {
 	private Connection connection;
 	private ResultSet result;
 	
-	public Assignments(String dbName, String userName, String pwd){
-		String url = "jdbc:mysql://localhost:3306/" + dbName;
-		 try {
-			Class.forName("com.mysql.jdbc.Driver");
-			this.connection = DriverManager.getConnection(url, userName, pwd);
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public Assignments(){
+		connection = MyDbConnection.getConnection();
 		 
  	}
 	
@@ -43,7 +37,7 @@ public class Assignments {
 		PreparedStatement ps = connection.prepareStatement(query);
 		result = ps.executeQuery();
 		while(this.result.next()){
-			instructor = new Instructor(result.getString("InstrID"), result.getString("FName"), result.getString("LName"), result.getString("Title"));
+			instructor = new Instructor(result.getInt("InstrID"), result.getString("FName"), result.getString("LName"), result.getString("Title"));
 			container.add(instructor);
 		}
 	}catch (SQLException e) {
@@ -54,16 +48,35 @@ public class Assignments {
 	return container;
 }
 	
+	public ArrayList<Course> getCourse(){
+		ArrayList<Course> course = new ArrayList<Course>();
+		String query = "select * from Course";
+		Course temp = null;
+		try {
+			PreparedStatement ps = connection.prepareStatement(query);
+			result = ps.executeQuery();
+			while(this.result.next()){
+				temp = new Course(result.getString("CourseID"), result.getString("CourseName"), result.getDouble("CreditHr"), result.getString("CourseType"), result.getString("CourseYear"));
+				course.add(temp);
+			}
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return course;
+}
+	
 	
 	public ArrayList<Student> retrieveAllStudents(){
-		String query = "select StudentID, FName, LName, Year from Student";
+		String query = "select StudentID, FName, LName, Year from Student order by FName ASC, LName";
 	Student student = null;
 	ArrayList<Student> container = new ArrayList<Student>();
 	try {
 		PreparedStatement ps = connection.prepareStatement(query);
 		result = ps.executeQuery();
 		while(this.result.next()){
-			student = new Student(result.getString("StudentID"), result.getString("FName"), result.getString("LName"), result.getInt("Year"));
+			student = new Student(result.getInt("StudentID"), result.getString("FName"), result.getString("LName"), result.getInt("Year"));
 			container.add(student);
 		}
 	}catch (SQLException e) {
@@ -76,7 +89,7 @@ public class Assignments {
 	
 	
 	public ArrayList<Student> retrieveSelectStudents(String level){
-	String query = "select StudentID, FName, LName , Year from Student where Year = ?";
+	String query = "select StudentID, FName, LName , Year from Student where Year = ? order by FName ASC, LName";
 	Student student = null;
 	ArrayList<Student> container = new ArrayList<Student>();
 	try {
@@ -84,7 +97,7 @@ public class Assignments {
 		ps.setInt(1, Integer.parseInt(level));
 		result = ps.executeQuery();
 		while(this.result.next()){
-			student = new Student(result.getString("StudentID"), result.getString("FName"), result.getString("LName"), result.getInt("Year"));
+			student = new Student(result.getInt("StudentID"), result.getString("FName"), result.getString("LName"), result.getInt("Year"));
 			container.add(student);
 		}
 	}catch (SQLException e) {
@@ -125,7 +138,7 @@ public class Assignments {
 			ps.setString(3, term);
 			result = ps.executeQuery();
 			while(this.result.next()){
-				existing.add(result.getString("InstrID"));
+				existing.add(result.getString("StudentID"));
 			}
 		}catch (SQLException e) {
 			// TODO Auto-generated catch block 
@@ -216,7 +229,7 @@ public class Assignments {
 	}
 	
 	public ArrayList<Instructor> retrieveAssignedInstructors(int year, String term, String courseID){
-		String query = "select  Instructor.InstrID, FName, LName, Title from Instructor, Lectures where Instructor.InstrID = Lectures.InstrID and Year = ? and Term = ? and CourseID = ?";
+		String query = "select  Instructor.InstrID, FName, LName, Title from Instructor, Lectures where Instructor.InstrID = Lectures.InstrID and Year = ? and Term = ? and CourseID = ? order by FName ASC, LName";
 		Instructor instructor = null;
 		ArrayList<Instructor> container = new ArrayList<Instructor>();
 		try {
@@ -226,7 +239,7 @@ public class Assignments {
 			ps.setString(3, courseID);
 			result = ps.executeQuery();
 			while(this.result.next()){
-				instructor = new Instructor(result.getString("InstrID"), result.getString("FName"), result.getString("LName"), result.getString("Title"));
+				instructor = new Instructor(result.getInt("InstrID"), result.getString("FName"), result.getString("LName"), result.getString("Title"));
 				container.add(instructor);
 			}
 		}catch (SQLException e) {
@@ -238,7 +251,7 @@ public class Assignments {
 	}
 	
 	public ArrayList<Student> retrieveAssignedstudents(int year, String term, String courseID){
-		String query = "select  Student.StudentID, FName, LName, Student.Year from Student, Attend where Student.StudentID = Attend.StudentID and Attend.Year = ? and Term = ? and CourseID = ?";
+		String query = "select  Student.StudentID, FName, LName, Student.Year from Student, Attend where Student.StudentID = Attend.StudentID and Attend.Year = ? and Term = ? and CourseID = ? order by FName ASC, LName";
 		Student student = null;
 		ArrayList<Student> container = new ArrayList<Student>();
 		try {
@@ -248,7 +261,7 @@ public class Assignments {
 			ps.setString(3, courseID);
 			result = ps.executeQuery();
 			while(this.result.next()){
-				student = new Student(result.getString("StudentID"), result.getString("FName"), result.getString("LName"), result.getInt("Year"));
+				student = new Student(result.getInt("StudentID"), result.getString("FName"), result.getString("LName"), result.getInt("Year"));
 				container.add(student);
 			}
 		}catch (SQLException e) {
@@ -280,7 +293,7 @@ public class Assignments {
 	}
 	
 	public ArrayList<Integer> getYearEvaluation(String courseID, String instrID) {
-		String query = "select  Year from Evaluation where CourseID = ? and InstrID = ?";
+		String query = "select  Distinct Year from Evaluation where CourseID = ? and InstrID = ? order by Year ASC";
 		ArrayList<Integer> container = new ArrayList<Integer>();
 		try {
 			PreparedStatement ps = connection.prepareStatement(query);
@@ -299,7 +312,7 @@ public class Assignments {
 	}
 	
 	public ArrayList<String> getTermEvaluation(String courseID, String instrID, int year) {
-		String query = "select  Term from Evaluation where CourseID = ? and InstrID = ? and Year = ?";
+		String query = "select  Distinct Term from Evaluation where CourseID = ? and InstrID = ? and Year = ?";
 		ArrayList<String> container = new ArrayList<String>();
 		try {
 			PreparedStatement ps = connection.prepareStatement(query);
@@ -359,7 +372,7 @@ public class Assignments {
 	}
 
 	public ArrayList<Student> StudentAssignEvaluation(Evaluation eval) {
-		String query = "select Student.StudentID, FName, LName, Year from Student, Assignments where Student.StudentID = Assignments.StudentID and EvalID = ?";
+		String query = "select Student.StudentID, FName, LName, Year from Student, Assignments where Student.StudentID = Assignments.StudentID and EvalID = ? order by FName ASC, LName";
 		Student student = null;
 		ArrayList<Student> container = new ArrayList<Student>();
 		try {
@@ -367,7 +380,7 @@ public class Assignments {
 			ps.setInt(1, eval.getEvalID());
 			result = ps.executeQuery();
 			while(this.result.next()){
-				student = new Student(result.getString("StudentID"), result.getString("FName"), result.getString("LName"), result.getInt("Year"));
+				student = new Student(result.getInt("StudentID"), result.getString("FName"), result.getString("LName"), result.getInt("Year"));
 				container.add(student);
 			}
 		}catch (SQLException e) {
@@ -394,5 +407,47 @@ public class Assignments {
 		}
 		
 	}
+
+	public ArrayList<Course> getCourseForStudent(int studentID, int year, String term) {
+		ArrayList<Course> course = new ArrayList<Course>();
+		String query = "select Course.CourseID, CourseName, CreditHr, CourseType, CourseYear from Course ,Assignments, Evaluation where Course.CourseID = Evaluation.CourseID and Evaluation.EvalID = Assignments.EvalID and StudentID = ? and Year = ? and Term = ?";
+		Course temp = null;
+		try {
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setInt(1,studentID);
+			ps.setInt(2, year);
+			ps.setString(3, term);
+			result = ps.executeQuery();
+			while(this.result.next()){
+				temp = new Course(result.getString("CourseID"), result.getString("CourseName"), result.getDouble("CreditHr"), result.getString("CourseType"), result.getString("CourseYear"));
+				course.add(temp);
+			}
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return course;
+	}
+
+	public ArrayList<Instructor> getInstructor(int id) {
+		String query = "select  InstrID, FName, LName, Title from Instructor where InstrID = ?";
+		Instructor instructor = null;
+		ArrayList<Instructor> container = new ArrayList<Instructor>();
+		try {
+			PreparedStatement ps = connection.prepareStatement(query);
+			result = ps.executeQuery();
+			while(this.result.next()){
+				instructor = new Instructor(result.getInt("InstrID"), result.getString("FName"), result.getString("LName"), result.getString("Title"));
+				container.add(instructor);
+			}
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return container;
+	}
+	
 
 }

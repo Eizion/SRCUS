@@ -1,6 +1,8 @@
 package controllers;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import dbHelpers.AddCourse;
 import dbHelpers.CheckCourse;
 import model.Course;
+import model.Student;
 
 /**
  * Servlet implementation class AddCourseServlet
@@ -34,9 +37,21 @@ public class AddCourseServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doPost(request, response);
-		}
+		CheckCourse cc = new CheckCourse();
+		ArrayList<Course> courses = cc.getAllCourses();
+		response.setContentType("text/html");
+		PrintWriter out=response.getWriter();
+		out.write("<table>");
+		out.write("<option value='' selected='selected'>---------------------------------</option>");
+    	for(int i = 0; i < courses.size(); i++) {
+    		Course current= courses.get(i);
+    		out.write("<tr><td>");
+    		out.write("<option value=" +current.getCourseID()+" />" + current.getCourseID()+":"+ current.getCourseName());
+    		out.write("</td></tr>");
+    		
+    		}
+    	out.write("</table>");
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -52,13 +67,13 @@ public class AddCourseServlet extends HttpServlet {
 		String classYear = request.getParameter("classYear");
 		Course course = new Course(courseID, courseName, creditHr, courseType, classYear);
 		//check for existing course in database
-		CheckCourse check = new CheckCourse("srcus_master", "root", "root");
+		CheckCourse check = new CheckCourse();
 		Course existCourse = check.doCheckID(courseID);
 		Course existName = check.doCheckName(courseName);
 		
 		//Add new course into database if it doesn't already exist
 		if(existCourse == null && existName == null){
-		AddCourse ac = new AddCourse("srcus_master", "root", "root");
+		AddCourse ac = new AddCourse();
 		ac.doAdd(course);
 		message = "The new course "+ courseName + " was successfully created!"; 
 		}

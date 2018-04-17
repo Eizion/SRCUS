@@ -35,7 +35,7 @@ public class SaveAnswer {
 	}
 	
 	
-	public void doSave(int evalID, int questionNum, String studentID, String answer){
+	public void doSave(int evalID, int questionNum, int studentID, String answer){
 		String query = "";
 		if(getFeedback(evalID, questionNum, studentID) == "") {
 			query ="insert into Feedback (Answer, EvalID, QuestionNum, StudentID ) values (?, ? ,? ,? )";
@@ -47,7 +47,7 @@ public class SaveAnswer {
 			ps.setString(1, answer);
 			ps.setInt(2, evalID);
 			ps.setInt(3, questionNum);
-			ps.setString(4, studentID);
+			ps.setInt(4, studentID);
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -55,7 +55,7 @@ public class SaveAnswer {
 		}		
 	}
 	
-	public void finalSubmit(int evalID, String studentID) {
+	public void finalSubmit(int evalID, int studentID) {
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		format = format.withLocale( Locale.US );
 		LocalDate submissionDate = LocalDate.now();
@@ -65,7 +65,7 @@ public class SaveAnswer {
 			ps.setString(1, "completed");
 			ps.setDate(2, java.sql.Date.valueOf(submissionDate));
 			ps.setInt(3, evalID);
-			ps.setString(4, studentID);
+			ps.setInt(4, studentID);
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -74,14 +74,14 @@ public class SaveAnswer {
 		
 	}
 	
-	public String getFeedback(int evalID, int questionNum, String studentID) {
+	public String getFeedback(int evalID, int questionNum, int studentID) {
 		String query = "select Answer from Feedback where EvalID = ? and QuestionNum = ? and StudentID = ?";
 		String answer="";
 		try {
 			PreparedStatement ps= connection.prepareStatement(query);
 			ps.setInt(1, evalID);
 			ps.setInt(2, questionNum);
-			ps.setString(3, studentID);
+			ps.setInt(3, studentID);
 			ResultSet res = ps.executeQuery();
 			if(res.next()) {
 				answer = res.getString("Answer");

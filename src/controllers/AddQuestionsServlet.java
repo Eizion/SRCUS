@@ -47,7 +47,7 @@ public class AddQuestionsServlet extends HttpServlet {
 		String questionType = request.getParameter("questionType");
 		HttpSession session = request.getSession();
 		Evaluation eval = (Evaluation) session.getAttribute("eval");
-		int questionNum = Integer.parseInt((String) session.getAttribute("questionNum"));
+		int questionNum = (Integer)session.getAttribute("questionNum");
 		
 		ArrayList<String> choices = new ArrayList<String>();
 		int counter = 1;
@@ -60,7 +60,7 @@ public class AddQuestionsServlet extends HttpServlet {
 
 		 }
 	
-		AddQuestion aq = new AddQuestion("srcus_master", "root", "root");
+		AddQuestion aq = new AddQuestion();
 		aq.doAddQuestion(question, questionType, eval, questionNum);
 		
 		//insert the choice options if question is a choose question or multi-select
@@ -77,7 +77,7 @@ public class AddQuestionsServlet extends HttpServlet {
 		if(clicked.equals("Save & Continue")) {    //to save and continue adding more questions
 		questionNum = questionNum +1;
 		url ="/QuestionForm.jsp";
-		session.setAttribute("questionNum", Integer.toString(questionNum));
+		session.setAttribute("questionNum", questionNum);
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
 		}

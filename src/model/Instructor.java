@@ -10,13 +10,13 @@ import java.io.Serializable;
  *
  */
 public class Instructor implements Serializable{
-	private String instrID;
+	private int instrID;
 	private String fName;
 	private String lName;
 	private String title;
 	
 	public Instructor() {
-		this.instrID = "";
+		this.instrID = 0;
 		this.fName = "";
 		this.lName = "";
 		this.title = "";
@@ -29,7 +29,7 @@ public class Instructor implements Serializable{
 	 * @param lName
 	 * @param title
 	 */
-	public Instructor(String instrID, String fName, String lName, String title) {
+	public Instructor(int instrID, String fName, String lName, String title) {
 		this.instrID = instrID;
 		this.fName = fName;
 		this.lName = lName;
@@ -39,14 +39,14 @@ public class Instructor implements Serializable{
 	/**
 	 * @return the instrID
 	 */
-	public String getInstrID() {
+	public int getInstrID() {
 		return instrID;
 	}
 
 	/**
 	 * @param instrID the instrID to set
 	 */
-	public void setInstrID(String instrID) {
+	public void setInstrID(int instrID) {
 		this.instrID = instrID;
 	}
 

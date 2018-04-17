@@ -22,15 +22,8 @@ public class RetrieveInstructors {
 	private Connection connection;
 	private ResultSet result;
 	
-	public RetrieveInstructors(String dbName, String userName, String pwd){
-		String url = "jdbc:mysql://localhost:3306/" + dbName;
-		 try {
-			Class.forName("com.mysql.jdbc.Driver");
-			this.connection = DriverManager.getConnection(url, userName, pwd);
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public RetrieveInstructors(){
+		connection = MyDbConnection.getConnection();
 		 
  	}
 	
