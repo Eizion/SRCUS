@@ -86,7 +86,10 @@
      					</tr>
      			</table>
      			${message}
+     			</br></br>
   		</form>
+  		
+  		<a href="courseevaluation.jsp"><input type="button" value ="Back" /></a>
 
 </body>
 </html>

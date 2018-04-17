@@ -17,7 +17,28 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <meta charset="utf-8" />
 <title>Southeast Regional Credit Union Schools Web Portal - Edit Course</title>
-
+<script type="text/javascript">
+		//function to generate the options range for the year input box
+		window.onload=function(){ //function to retrieve all student assigned to participate in the evaluation
+			var xhttp;
+			if (window.XMLHttpRequest){
+				  xhttp=new XMLHttpRequest();
+			  }
+			else{
+			  xhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			  }
+			xhttp.onreadystatechange=function(){
+			    if (xhttp.readyState == 4 && xhttp.status == 200) {
+			    	if(xhttp.response == "<table></table>"){
+			    		window.alert("There are currently no courses in database.");
+			    	}
+			    document.getElementById("courseID").innerHTML = xhttp.responseText;
+			    }
+			};
+			  xhttp.open("GET", "courseServlet", true);
+			  xhttp.send();
+	};
+		</script>
 </head>
 <body style="background-color: dodgerblue;">
 <div class="header">
@@ -40,29 +61,26 @@
 	</div>
 		<h3>Edit Course Information</h3>
 		<h5>Select the course to be edited</h5>
-		<sql:setDataSource var = "srcus" driver = "com.mysql.jdbc.Driver"
-         url = "jdbc:mysql://localhost:3306/srcus_master"
-         user = "root"  password = "root"/>
 		
-         <sql:query dataSource = "${srcus}" var = "result">
-            SELECT CourseID, CourseName from Course;
-         </sql:query>
          
 		<form name="editCourse" action ="editCourse" method="post">
 			<label>Course Code</label></br>
-			<select name="courseID">
+			<select name="courseID" id="courseID" required>
 			<option value="" selected="selected">---------------</option>
-			<c:forEach var="row" items="${result.rows}" >
-				<option value="${row.CourseID}">${row.CourseID}:${row.CourseName}</option>  
-			</c:forEach>
+			
 			</select></br></br>
 			
 	
 			<input type="submit" name="submit" value="Edit" />
 			<input type="submit" name="submit" value="Assign Instructors" />
 			<input type="submit" name= "submit" value="Assign Students" />
+			<input type="submit" name="submit" value="Undo Assigned Instructors" />
+			<input type="submit" name= "submit" value="Undo Assigned Students" />
+			
 			
 		</form>
 		${message}
+		</br></br>
+		<a href="courseevaluation.jsp"><input type="button" value ="Back" /></a>
 </body>
 </html>

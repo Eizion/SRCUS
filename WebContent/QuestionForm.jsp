@@ -6,7 +6,7 @@
     <%
         
         Evaluation eval = (Evaluation)session.getAttribute("eval");
-        String questionNum = (String)session.getAttribute("questionNum");
+        //String questionNum = (String)session.getAttribute("questionNum");
     %>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +41,7 @@
 	</div>
 		<h3>Evaluation Questions</h3>
 		<form name="evalQuestions" action="addQuestions" method="post">
-			<label>Enter question number <%=questionNum %></label></br></br>
+			<label>Enter question number ${questionNum }</label></br></br>
 			<textarea name="question" value="" rows="5" cols="40" required></textarea></br></br>
 		
 			<label>Type of question</label>

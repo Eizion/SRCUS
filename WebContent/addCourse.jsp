@@ -59,8 +59,10 @@
 				<option value="For all students">For all students</option>
 			</select></br>
 			<input type="submit" value="Add course" />
-			<input type="reset" value="Reset" />
+			<input type="reset" value="Reset" /> 
 		</form>
 		${message}
+		</br></br>
+		<a href="courseevaluation.jsp"><input type="button" value ="Back" /></a>
 </body>
 </html>

@@ -37,8 +37,7 @@
 	<a href="CreateEvaluation.jsp">Create Evaluations</a><br>
 	<a href="editEvaluation.jsp">Edit Evaluation</a><br>
 	<a href="selectEvaluation.jsp">Load Evaluation</a><br>
-	<a href="#">Generate Reports</a><br>
-	<a href="#">View Reports</a>
+	<a href="generateReport.jsp">Generate Reports</a><br>
 	</div>
 	</div>
 

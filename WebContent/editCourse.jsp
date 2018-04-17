@@ -3,7 +3,8 @@
     <%@ page import="model.Course, dbHelpers.CheckCourse" %>
     <%
     Course course = new Course();
-    course = (Course)request.getAttribute("course");
+    //HttpSession session = request.getSession();
+    course = (Course)session.getAttribute("course");
     String tempcourse= course.getCourseID();
     session.setAttribute("oldCourseID", tempcourse);
     %>
