@@ -101,7 +101,7 @@ public class SaveAnswersServlet extends HttpServlet {
 		}
 		
 		//create a connection to database and save answer
-		SaveAnswer sa = new SaveAnswer("srcus_master", "root", "Tsega12!");
+		SaveAnswer sa = new SaveAnswer();
 		sa.doSave(eval.getEvalID(), questionNum, studentID, answer);
 		questionNum++;
 		if (questionNum <= container.length) {

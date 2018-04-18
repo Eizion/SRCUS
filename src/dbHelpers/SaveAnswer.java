@@ -22,16 +22,8 @@ public class SaveAnswer {
 	
 	private Connection connection;
 	
-	public SaveAnswer(String dbName, String username, String pwd){
-		String url="jdbc:mysql://localhost:3306/" + dbName;
-	
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			this.connection = DriverManager.getConnection(url, username, pwd);
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public SaveAnswer(){
+		connection = MyDbConnection.getConnection();
 	}
 	
 	

@@ -19,16 +19,8 @@ import model.Course;
 public class UpdateCourse {
 	private Connection connection;
 	
-	public UpdateCourse(String dbName, String username, String pwd){
-		String url="jdbc:mysql://localhost:3306/" + dbName;
-	
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			this.connection = DriverManager.getConnection(url, username, pwd);
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public UpdateCourse(){
+		connection = MyDbConnection.getConnection();
 	}
 	
 	public void doUpdate(Course course, String oldCourseID){
