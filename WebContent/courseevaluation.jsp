@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -32,12 +33,18 @@
 	</div>
 	<div style="width: 20%;height: 20%;position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;">
 	<div style="background-color: white; padding: 25px; box-shadow: 3px 3px 3px #888888;border-radius: 0px;">
+	<c:if test = "${user.role == 1 }">
 	<a href="addCourse.jsp">Create Course</a><br>
 	<a href="selectCourse.jsp">Select Course</a><br>
 	<a href="CreateEvaluation.jsp">Create Evaluations</a><br>
 	<a href="editEvaluation.jsp">Edit Evaluation</a><br>
+	</c:if>
+	<c:if test = "${user.role == 2 }">
 	<a href="selectEvaluation.jsp">Load Evaluation</a><br>
+	</c:if>
+	<c:if test = "${(user.role == 1) || (user.role == 3)}">
 	<a href="generateReport.jsp">Generate Reports</a><br>
+	</c:if>
 	</div>
 	</div>
 
