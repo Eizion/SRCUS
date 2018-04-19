@@ -10,21 +10,29 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$( document ).ready(function() {
-		jQuery('#title').hide(); 
+		jQuery('#title').hide();
+		//jQuery('#title select').removeAttr('required');
 		jQuery('#year').hide();
+		//jQuery('#year select').removeAttr('required');
 		
 		jQuery("#role").change(function(){
 			var selectedValue = jQuery("#role").val();
 			
 			if (selectedValue == 2) {
-				jQuery('#title').hide();
 				jQuery('#year').show();
+				//jQuery('#year select').attr('required',true);
+				jQuery('#title').hide();
+				//jQuery('#title select').removeAttr('required');
 			} else if (selectedValue == 3) {
 				jQuery('#title').show();
+				//jQuery('#title select').attr('required',true);
 				jQuery('#year').hide();
+				//jQuery('#year select').removeAttr('required');
 			} else {
 				jQuery('#title').hide();
+				//jQuery('#title select').removeAttr('required');
 				jQuery('#year').hide();
+				//jQuery('#year select').removeAttr('required');
 			}
 			
 		});
@@ -175,8 +183,8 @@
      				</tr>
      				<tr id="year">
 	    				<td><label>Year:</label></td>
-     					<td><select name="year">
-     						<option value="">-----</option>
+     					<td><select name="year" >
+     						<option value="0">-----</option>
      						<option value="1">1st Year</option>
      						<option value="2">2nd Year</option>
      						<option value="3">3rd Year</option>

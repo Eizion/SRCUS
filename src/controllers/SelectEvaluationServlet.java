@@ -2,8 +2,11 @@ package controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,6 +25,7 @@ import model.Evaluation;
 import model.Instructor;
 import model.Question;
 import model.User;
+import sun.util.calendar.BaseCalendar.Date;
 
 /**
  * Servlet implementation class SelectEvaluationServlet
@@ -163,11 +167,11 @@ public class SelectEvaluationServlet extends HttpServlet {
 						if(user.getRole() == 2) {
 							String result = ce.checkActivationEvaluation(existing);
 							boolean complete = ce.checkStatus(existing, user);
-							if(!result.equals("")) {
+							if(!result.equals("")) { //past deadline or before evaluation is activated
 								message=result;
 								url="/selectEvaluation.jsp";
 								}
-							else if(complete){
+							else if(complete){ //Student has already completed evaluation
 								message= "You have already completed this evaluation";
 								url="/selectEvaluation.jsp";
 								}
@@ -204,6 +208,18 @@ public class SelectEvaluationServlet extends HttpServlet {
 						session.setAttribute("year", year);
 						session.setAttribute("term", term);
 						url="/undoAssignedStudentEvaluation.jsp";
+					}
+					else if(submit.equals("Change Evaluation Dates")) {
+						String active = uq.getEvalActiveDate(existing);
+						String deadline = uq.getEvalDeadline(existing);
+						DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+						format = format.withLocale( Locale.US );
+						LocalDate activeD = LocalDate.parse(active, format);
+						LocalDate submD = LocalDate.parse(deadline, format);
+						request.setAttribute("active", activeD);
+						request.setAttribute("deadline", submD);
+						session.setAttribute("eval", existing);
+						url="/ChangeDeadlines.jsp";
 					}
 				}
 			}

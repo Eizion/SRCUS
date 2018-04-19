@@ -8,9 +8,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import model.Evaluation;
+import sun.util.calendar.BaseCalendar.Date;
 
 /**
  * @author Lideta
@@ -172,6 +174,61 @@ private Connection connection;
 			e.printStackTrace();
 		} 
 		}
+	}
+
+
+	public String getEvalActiveDate(Evaluation existing) {
+		String query = "select ActivationDate from Evaluation where EvalID = ?";
+		ResultSet res;
+		String activation = "";
+		try {
+			PreparedStatement ps= connection.prepareStatement(query);
+			ps.setInt(1, existing.getEvalID());
+			res = ps.executeQuery();
+			if(res.next()) {
+			activation = res.getDate("ActivationDate").toString();
+			}
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return activation;
+	}
+
+
+	public String getEvalDeadline(Evaluation existing) {
+		String query = "select SubmissionDeadline from Evaluation where EvalID = ?";
+		ResultSet res;
+		String deadline = "";
+		try {
+			PreparedStatement ps= connection.prepareStatement(query);
+			ps.setInt(1, existing.getEvalID());
+			res = ps.executeQuery();
+			if(res.next()) {
+			deadline = res.getDate("SubmissionDeadline").toString();
+			}
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return deadline;
+	}
+
+
+	public void saveDates(LocalDate activeD, LocalDate submD, Evaluation eval) {
+			String query = "update Evaluation set ActivationDate= ?, SubmissionDeadline = ? where EvalID = ? ";
+			try {
+				PreparedStatement ps = connection.prepareStatement(query);
+				ps.setDate(1, java.sql.Date.valueOf(activeD));
+				ps.setDate(2, java.sql.Date.valueOf(submD));
+				ps.setInt(3, eval.getEvalID());
+				ps.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+		
+		
 	}
 
 }

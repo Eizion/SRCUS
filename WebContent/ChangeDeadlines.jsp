@@ -2,9 +2,9 @@
     pageEncoding="ISO-8859-1"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix = "sql" uri = "http://java.sun.com/jsp/jstl/sql" %>
-    <%
-   String message = (String)request.getAttribute("message");
-   %>
+    
+  
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,10 +14,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Southeast Regional Credit Union Schools Web Portal - Create Evaluation</title>
+<title>Southeast Regional Credit Union Schools Web Portal - Change Deadlines</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" src="resources/js/evaluations.js"></script>
-    
+
 </head>
 <body style="background-color: dodgerblue;">
 <div class="header">
@@ -38,56 +37,29 @@
   </div>
 </nav>
 	</div>
-        <h3>Select Evaluation</h3>
-        
-      <form name="evaluation" action="selectEvaluation" method="post">
-    			<table>
-    				<tr>
-    					<td><label>Instructor Name:</label></td>
-     					<td><select name="instrID" id="instrID" required onChange="getCourse(this.value);" >
-							
-							</select>
-						</td>
-     				</tr>
-     				<tr>
-     					<td><label>Course Name:</label></td>
-     					<td><select name="courseID" id="courseID" required onChange="getYear(this.value);">
-							<option value="">---Course Name---</option>
-							</select>
-						</td>
-     				</tr>
-     				<tr>
-     					<td><label>Year:</label></td>
-     					<td><select name="year" id="year" required onChange="getTerm(this.value);">
-     						<option value="" selected="selected"></option>
-     						</select>
+		<h1>Southeast Regional Credit Union Schools Web Portal</h1>
+		<h3>Edit activation and submission dates for evaluation of course ${eval.courseID }</h3>
+		
+		<form name="changeDates" action="updateDates" method="post">
+		<table>
+				<tr>
+     					<td><label>Activation Date:</label>
+     						<input type="date" name="activation" value="${active}" required >
      					</td>
-     				</tr>
-     				<tr>
-	    				<td><label>Term:</label></td>
-     					<td><select name="term" id="term" required>
-     						<option value="" selected="selected"></option>
-     						<option value="spring">Spring Semester</option>
-     						<option value="fall">Fall Semester</option>
-     						<option value="summer">Summer Semester</option>
-     						</select>
+     			</tr>
+     			<tr>
+	    				<td><label>Submission Deadline:</label>
+     					<input type="date" name="deadline" value="${deadline}" required  >
      					</td>
-     				</tr>
-     				<tr>
-	    			
-     				<tr>
-     					<td><input type="submit" name="submit" value="Edit Evaluation" /></td>
-     					<td><input type="submit" name="submit" value="Delete Evaluation" onClick="return confirmDelete();" /></td>
-     					<td><input type="submit" name="submit" value="Assign Students" /></td>
-     					<td><input type="submit" name="submit" value="Undo Assigned Students" />
-     					<td><input type="submit" name="submit" value="Change Evaluation Dates" />
-     					<td><input type="reset" name="reset" value="Reset" /></td>
-     					</tr>
-     			</table>
-     			${message}
-  		</form>
-  		</br></br>
-			<a href="courseevaluation.jsp"><input type="button" value ="Back" /></a>
-
+     					
+     			</tr>
+     				
+		</table>
+		
+		<input type="submit" name="submit" value="Update Dates"   >
+		<a href="editEvaluation.jsp"><input type="button" value ="Back" /></a>
+		</form>
+		
+		
 </body>
 </html>
