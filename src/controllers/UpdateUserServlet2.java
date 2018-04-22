@@ -15,7 +15,7 @@ import model.User;
 /**
  * Servlet implementation class UpdateUserServlet2
  */
-@WebServlet({ "/UpdateUserServlet2", "/updateUser2" })
+@WebServlet({ "/UpdateUserServlet2", "/updateUser" })
 public class UpdateUserServlet2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

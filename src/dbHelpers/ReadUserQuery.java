@@ -6,7 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import model.ContactInfo;
 import model.User;
+import model.Year;
 
 public class ReadUserQuery {
 	
@@ -15,6 +17,11 @@ public class ReadUserQuery {
 	
 	private User user = new User();
 	private int user_id;
+	private ContactInfo contactInfo = new ContactInfo();
+	private int studentID;
+	private int intr_ID;
+	private Year year = new Year();
+	private String title;
 	
 	public ReadUserQuery() {
 		connection = MyDbConnection.getConnection();
@@ -75,8 +82,21 @@ public class ReadUserQuery {
 					table += "<span style='color:red;'>Invalid role! Please update!</span>";
 				}
 				table += "</td>";
+				/*if (user.getRole() == 1) {
+					table += "<td>";
+					table += "<a href=updateUser?user_id=" + user.getId() + ">update</a>";
+					table += "</td>";
+				} else if (user.getRole() == 2) {
+					table += "<td>";
+					table += "<a href=updateUser?user_id=" + user.getId() + ">update</a>";
+					table += "</td>";
+				} else if (user.getRole() == 3) {
+					table += "<td>";
+					table += "<a href=updateUser?user_id=" + user.getId() + ">update</a>";
+					table += "</td>";
+				} */
 				table += "<td>";
-					table += "<a href=update2?user_id=" + user.getId() + ">update</a>";
+				table += "<a href=updateUser?user_id=" + user.getId() + ">update</a>";
 				table += "</td>";
 				table += "</tr>";
 				
@@ -90,6 +110,71 @@ public class ReadUserQuery {
 		
 		return table;
 		
+	}
+	
+	/*public void viewUser() {
+		
+		String query = "select user_id, email, fName, lName, role from user where user_id=?;";
+			try {
+				PreparedStatement ps = this.connection.prepareStatement(query);
+				this.results = ps.executeQuery();
+			} catch (SQLException e) {					
+			// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			
+	}
+	
+	public void viewAdmin() {
+		String query = "select user_id, email, fName, lName, role from user where user_id=?;";
+		try {
+			PreparedStatement ps = this.connection.prepareStatement(query);
+			this.results = ps.executeQuery();
+		} catch (SQLException e) {					
+		// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}*/
+	
+	public void viewStudent(int studentID) {
+		String query = "select Year, AddressLine1, AddressLine2, City, State, Zipcode, Organization, Phone from student where StudentID=?;";
+		
+		this.studentID = studentID;
+		
+		try {
+			PreparedStatement ps = this.connection.prepareStatement(query);
+			
+			ps.setInt(1, studentID);
+			
+			this.results = ps.executeQuery();
+			
+			this.results.next();
+			
+			year.setYear(this.results.getInt("year"));
+			contactInfo.setAddressLine1(this.results.getString("AddressLine1"));
+			contactInfo.setAddressLine2(this.results.getString("AddressLine2"));
+			contactInfo.setCity(this.results.getString("City"));
+			contactInfo.setState(this.results.getString("State"));
+			contactInfo.setZipcode(this.results.getInt("Zipcode"));
+			contactInfo.setOrganization(this.results.getString("Organization"));
+			contactInfo.setPhone(this.results.getString("Phone"));
+			
+			
+		} catch (SQLException e) {					
+		// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void viewInstructor(int InstrID) {
+		String query = "select InstrID, Title, AddressLine1, AddressLine2, City, State, Zipcode, Organization, Phone from student where InstrID=?;";
+		try {
+			PreparedStatement ps = this.connection.prepareStatement(query);
+			ps.setInt(1, InstrID);
+			this.results = ps.executeQuery();
+		} catch (SQLException e) {					
+		// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void readUser(int user_id) {
@@ -121,6 +206,14 @@ public class ReadUserQuery {
 	
 	public User getUser(){
 		return this.user;
+	}
+	
+	public ContactInfo getContactInfo(){
+		return this.contactInfo;
+	}
+	
+	public Year getYear(){
+		return this.year;
 	}
 	
 	
