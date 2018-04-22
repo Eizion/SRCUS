@@ -52,13 +52,21 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="home.jsp">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <li class="nav-link"><a href="login?logout=true">Logout</a></li>
+
+    </ul>
   </div>
 </nav>
 	</div>
 		
 	<div style="width: 20%;height: 20%;position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;">
 	<div style="background-color: white; padding: 25px; box-shadow: 3px 3px 3px #888888;border-radius: 0px;">
-			<form name="registration" action="register" method="post">
+			<form name="registration" action="createUser" method="post">
 			<p>Please Fill Out Your Information Here:</p>
     			<table>
      				<tr>
@@ -81,6 +89,7 @@
 	    				<td><label>User Role:</label></td>
      					<td><select id="role" name="role" required>
      							<option value="">-----</option>
+     							<option value="1">Administrator</option>
      							<option value="2">Student</option>
      							<option value="3">Instructor</option>
      						</select>
@@ -183,7 +192,7 @@
      					</td>
      				</tr>
      				<tr>
-     					<td><a href="index.jsp">back</a></td>
+     					<td><a href="manage.jsp">back</a></td>
      					<td><input class="btn btn-primary" style="padding-top: 0px;padding-bottom:  0px; float:right;" type="submit" name="submit" value="Register"></td>
      					
      				</tr>

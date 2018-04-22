@@ -107,7 +107,7 @@ public class RegisterServlet extends HttpServlet {
 			
 			String message = "You have successfully created the user.";
 			request.setAttribute("message", message);
-			url = "manage.jsp";
+			url = "regSuccess.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);

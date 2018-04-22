@@ -34,6 +34,7 @@
 				
 				
 					<input style="padding-top: 0px;padding-bottom:  0px;" class="btn btn-primary " type="submit" value="Login">
+					<a href="registerUser.jsp">Register</a>
 					<a style="margin-left: 57px;" href="forgotpassword.jsp">Forgot Password</a>
 				${errorMessage}
 		</form>

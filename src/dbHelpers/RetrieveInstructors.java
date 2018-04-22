@@ -35,7 +35,7 @@ public class RetrieveInstructors {
 		PreparedStatement ps = connection.prepareStatement(query);
 		result = ps.executeQuery();
 		while(this.result.next()){
-			instructor = new Instructor(result.getString("InstrID"), result.getString("FName"), result.getString("LName"), result.getString("Title"));
+			//instructor = new Instructor(result.getString("InstrID"), result.getString("FName"), result.getString("LName"), result.getString("Title"));
 			container.add(instructor);
 		}
 	}catch (SQLException e) {
