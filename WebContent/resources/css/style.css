@@ -89,3 +89,14 @@ height: auto;
 .homepage-links, a.homepage-links:hover{
 	color: snow;
 }
+.next-button{
+	float:right;
+}
+.space-bottom{
+	padding-bottom:10px;
+}
+.side-by-side{
+	display:initial;
+	width: auto;
+    margin-right: 10px;
+}

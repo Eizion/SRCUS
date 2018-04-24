@@ -19,7 +19,7 @@
 <script type="text/javascript" src="resources/js/evaluations.js"></script>
     
 </head>
-<body style="background-color: dodgerblue;">
+<body>
 <div class="header">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">Southeast Regional Credit Union Schools Web Portal</a>

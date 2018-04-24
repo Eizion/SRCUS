@@ -10,7 +10,7 @@
 <meta charset="utf-8" />
 <title>Southeast Regional Credit Union Schools Web Portal - Course</title>
 </head>
-<body style="background-color: dodgerblue;">
+<body>
 <div class="header">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">Southeast Regional Credit Union Schools Web Portal</a>
