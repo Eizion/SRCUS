@@ -3,21 +3,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+<head><!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+
 <link type="text/css" rel="stylesheet" href="resources/css/bootstrap.min.css" >
 <link type="text/css" rel="stylesheet" href="resources/css/style.css" >
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="CustomStyles.css" rel="stylesheet" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Southeast Regional Credit Union  Schools Web Portal</title>
 </head>
-<body style="background-color: dodgerblue;" >
-	
-	<h1>Southeast Regional Credit Union Schools Web Portal</h1>
-	<div>
+<body style="background-color: #f2f2f2;" >
+<div class="jumbotron">
+<div class="container-fluid">
+	<h1>SRCUS Web Portal</h1>	
+	<h3>Southeast Regional Credit Union Schools</h3>
+	</div>
     <div class="center-login">
 <div style="
-    background-color: white;
+    background-color: #ffce99;
     padding: 25px;
     box-shadow: 3px 3px 3px #888888;
     border-radius: 0px;
@@ -40,6 +43,6 @@
 		</div>
 		</div>
 		</div>
-		
+</div>		
 </body>
 </html>

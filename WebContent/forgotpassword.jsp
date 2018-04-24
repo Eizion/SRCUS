@@ -14,8 +14,9 @@
 	<div style="background-color: white; padding: 25px; box-shadow: 3px 3px 3px #888888;border-radius: 0px;">
 	<p>Please enter in your email address</p>
 	<form name="emailForm" action="forgotpassword" method="post">
-		Email:
+		<p>Email:
 		<input type="text" name="email" required />
+		</p>
 		<input type="submit" value="Submit">
 	</form>
 </div>
