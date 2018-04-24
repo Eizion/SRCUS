@@ -69,9 +69,10 @@
 				required>
 				<option value="">---Instructor Name---</option>
 			</select> 
-			</div class="form-group">
+			</div>
 			<input class="btn btn-primary" type="submit" name="submit" value="Open Evaluation">
 			<input class="btn btn-danger" type="reset" name="reset" value="Reset" /> ${message}
+			
 		</form>
 		</br></br>
 			<a href="courseevaluation.jsp"><input type="button" class="btn btn-light" value ="Back" /></a>
