@@ -42,10 +42,10 @@
 		<h2>Welcome, <c:out value="${user.fName}!!!" /></h2>
 		<div class="row center">
 		<c:if test = "${user.role == 1 }">
-				<div id="pic1" class="homepage-icons"><a href="manage.jsp">Manage Users</a></div>
+				<div id="pic1" class="homepage-icons"><a class="homepage-links" href="manage.jsp">Manage Users</a></div>
 		</c:if>
-				<div id="pic2" class="homepage-icons"><a href="courseevaluation.jsp">Course Evaluations</a></div>
-				<div id="pic3" class="homepage-icons"><a href="settings.jsp">User Settings</a></div>
+				<div id="pic2" class="homepage-icons"><a class="homepage-links" href="courseevaluation.jsp">Course Evaluations</a></div>
+				<div id="pic3" class="homepage-icons"><a class="homepage-links" href="settings.jsp">User Settings</a></div>
 	</div>
 	
 	</div>

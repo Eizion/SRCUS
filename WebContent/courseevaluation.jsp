@@ -5,17 +5,19 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link type="text/css" rel="stylesheet" href="resources/css/bootstrap.min.css" >
+<link type="text/css" rel="stylesheet" href="resources/css/style.css" >
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Admin - Course Evaluations</title>
 </head>
-<body style="background-color: dodgerblue;">
+<body>
+<div class="container" >
 <div class="header">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Southeast Regional Credit Union Schools Web Portal</a>
+  <a class="navbar-brand" href="#"><img class="brand-image" src="resources/images/ScrusBrand.png" ></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -31,22 +33,22 @@
   </div>
 </nav>
 	</div>
-	<div style="width: 20%;height: 20%;position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;">
-	<div style="background-color: white; padding: 25px; box-shadow: 3px 3px 3px #888888;border-radius: 0px;">
+	<div class="center-login">
+	<div style="background-color: white; padding: 25px; box-shadow: 3px 3px 3px 3px #888888;border-radius: 0px;">
 	<c:if test = "${user.role == 1 }">
-	<a href="addCourse.jsp">Create Course</a><br>
-	<a href="selectCourse.jsp">Select Course</a><br>
-	<a href="CreateEvaluation.jsp">Create Evaluations</a><br>
-	<a href="editEvaluation.jsp">Edit Evaluation</a><br>
+	<a class="btn btn-link" href="addCourse.jsp">Create Course</a><br>
+	<a class="btn btn-link" href="selectCourse.jsp">Select Course</a><br>
+	<a class="btn btn-link" href="CreateEvaluation.jsp">Create Evaluations</a><br>
+	<a class="btn btn-link" href="editEvaluation.jsp">Edit Evaluation</a><br>
 	</c:if>
 	<c:if test = "${user.role == 2 }">
-	<a href="selectEvaluation.jsp">Load Evaluation</a><br>
+	<a class="btn btn-link" href="selectEvaluation.jsp">Load Evaluation</a><br>
 	</c:if>
 	<c:if test = "${(user.role == 1) || (user.role == 3)}">
-	<a href="generateReport.jsp">Generate Reports</a><br>
+	<a class="btn btn-link" href="generateReport.jsp">Generate Reports</a><br>
 	</c:if>
 	</div>
 	</div>
-
+</div>
 </body>
 </html>

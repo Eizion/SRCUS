@@ -30,6 +30,7 @@
     border-radius: 15px;
     margin-left: 40px;
     margin-bottom: 30px;
+    color:snow;
 }
 
 @media only screen and (max-width: 1024px){
@@ -41,6 +42,7 @@
     border-radius: 15px;
 	margin-left: 0px; 
     margin-bottom: 30px;
+    color:snow;
 }
 }
 .center{
@@ -63,21 +65,27 @@ width: 100px;
 height: auto;
 }
 
-@media only screen and (max-width:768px) {
-.header{
-	width:108%;
-}
-}
+/* @media only screen and (max-width:768px) { */
+/* .header{ */
+/* 	width:108%; */
+/* } */
+/* } */
 
 .wrapper{
 	text-align:center;
 }
 #pic1{
-	 background-image: url("resources/images/manageusers.png");
+	 background-image: url("manageusers.png");
 }
 #pic2{
-	 background-image: url("resources/images/icons8-exam-50.png");
+	 background-image: url("icons8-exam-50.png");
+	     background-repeat: space;
 }
 #pic3{
-	 background-image: url("resources/images/settings.png");
+	 background-image: url("settings.png");
+	 background-repeat: round;
+}
+
+.homepage-links, a.homepage-links:hover{
+	color: snow;
 }
