@@ -42,7 +42,7 @@ public class ReadUserQuery {
 	public String getHTMLTable() {
 		
 		String table = "";
-		table += "<table class='sortable' border='1'>";
+		table += "<table class='table table-striped sortable' border='1'>";
 		table += "<tr>";
 		table += "<th>Email</th>";
 		table += "<th>First Name</th>";
