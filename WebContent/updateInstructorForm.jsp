@@ -2,11 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@page import = "model.User" %>
 <%@page import = "model.ContactInfo" %>
-<%@page import = "model.Year" %>
+<%@page import = "model.Title" %>
     
 <%User updatedUser = (User) session.getAttribute("updatedUser"); %>
 <%ContactInfo updatedContactInfo = (ContactInfo) request.getAttribute("updatedContactInfo"); %>
-<%Year year = (Year) request.getAttribute("year"); %>
+<%Title title = (Title) request.getAttribute("title"); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -34,7 +34,7 @@
     </ul>
   </div>
 </nav>
-<form name="updateForm" action="UpdateStudent" method="get">
+<form name="updateForm" action="UpdateInstructor" method="get">
 
 	<br>
 	<label>First Name:</label>
@@ -46,8 +46,8 @@
 	<label>Email:</label>
 	<input type=text name=email value="<%= updatedUser.getEmail() %>" />
 	<br>
-	<label>Year:</label>
-	<input type=text name=year value="<%= year.getYear() %>" />
+	<label>Title:</label>
+	<input type=text name=title value="<%= title.getTitle() %>" />
 	<br>
 	<label>Address Line 1:</label>
 	<input type=text name=addressLine1 value="<%= updatedContactInfo.getAddressLine1() %>" />
@@ -74,8 +74,5 @@
 	<input type=submit name=submit value="Update" />
 
 </form>
-
-
-
 </body>
 </html>

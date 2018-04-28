@@ -1,4 +1,3 @@
-//Unused servlet due to some refactoring but do not want to delete
 package controllers;
 
 import java.io.IOException;
@@ -9,21 +8,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dbHelpers.UpdateUserQuery;
 import model.User;
 
 /**
- * Servlet implementation class UpdateUserServlet2
+ * Servlet implementation class UpdateAdminServlet
  */
-@WebServlet({ "/UpdateUserServlet2", "/updateUser2" })
-public class UpdateUserServlet2 extends HttpServlet {
+@WebServlet({ "/UpdateAdminServlet", "/UpdateAdmin" })
+public class UpdateAdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateUserServlet2() {
+    public UpdateAdminServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,15 +41,16 @@ public class UpdateUserServlet2 extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		int user_id = Integer.parseInt(request.getParameter("id"));
+		HttpSession session = request.getSession();
+		User updatedUser = (User) session.getAttribute("updatedUser");
+		int userID = updatedUser.getId();
+		int role = updatedUser.getRole();
 		String email = request.getParameter("email");
 		String fName = request.getParameter("fName");
 		String lName = request.getParameter("lName");
-		int role = Integer.parseInt(request.getParameter("role"));
 		
 		User user = new User();
-		user.setId(user_id);
+		user.setId(userID);
 		user.setEmail(email);
 		user.setfName(fName);
 		user.setlName(lName);
@@ -57,6 +58,7 @@ public class UpdateUserServlet2 extends HttpServlet {
 		
 		UpdateUserQuery uuq = new UpdateUserQuery();
 		uuq.updateUser(user);
+		uuq.updateAdmin(user);
 		
 		String message = "You have successfully updated the user.";
 		request.setAttribute("message", message);
@@ -64,7 +66,6 @@ public class UpdateUserServlet2 extends HttpServlet {
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
-		
 	}
 
 }

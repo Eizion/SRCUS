@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@page import = "model.User" %>
     
-<%User updatedUser = (User) request.getAttribute("updatedUser"); %>
+<%User updatedUser = (User) session.getAttribute("updatedUser"); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -30,7 +30,7 @@
     </ul>
   </div>
 </nav>
-<form name=updateForm action=updateUser2 method=get>
+<form name="updateForm" action="UpdateAdmin" method="get">
 
 	<label>Email:</label>
 	<input type=text name=email value="<%= updatedUser.getEmail() %>" />
@@ -40,9 +40,6 @@
 	<br>
 	<label>Last Name:</label>
 	<input type=text name=lName value="<%= updatedUser.getlName() %>" />
-	<br>
-	<label>Role:</label>
-	<input type=text name=role value="<%= updatedUser.getRole() %>" />
 	<br>
 	
 	<input type=submit name=submit value="Update" />

@@ -8,10 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dbHelpers.ReadUserQuery;
 import model.User;
 import model.ContactInfo;
+import model.Title;
 import model.Year;
 
 /**
@@ -20,6 +22,7 @@ import model.Year;
 @WebServlet({ "/UpdateUsrServlet", "/updateUser" })
 public class UpdateUsrServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private HttpSession session;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -42,18 +45,17 @@ public class UpdateUsrServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		session = request.getSession();
 		int user_id = Integer.parseInt(request.getParameter("user_id"));
 		int studentID = Integer.parseInt(request.getParameter("user_id"));
 		int InstrID = Integer.parseInt(request.getParameter("user_id"));
 		String url = "";
-		String title= "";
 		
 		ReadUserQuery ruq = new ReadUserQuery();
 		ruq.readUser(user_id);
 		User updatedUser = ruq.getUser();
 		
-		request.setAttribute("updatedUser", updatedUser);
+		session.setAttribute("updatedUser", updatedUser);
 		
 		if (updatedUser.getRole() == 1){
 			url = "/updateForm.jsp";
@@ -64,8 +66,17 @@ public class UpdateUsrServlet extends HttpServlet {
 			request.setAttribute("updatedContactInfo", updatedContactInfo);
 			request.setAttribute("year", year);
 			url = "/updateStudentForm.jsp";
+		} else if (updatedUser.getRole() == 3){
+			ruq.viewInstructor(InstrID);
+			ContactInfo updatedContactInfo = ruq.getContactInfo();
+			Title title = ruq.getTitle();
+			request.setAttribute("updatedContactInfo", updatedContactInfo);
+			request.setAttribute("title", title);
+			url = "/updateInstructorForm.jsp";
 		} else {
-			url = "/updateForm.jsp";
+			String message = "Error retriving record.";
+			request.setAttribute("message", message);
+			url = "/search";
 		}
 		
 		

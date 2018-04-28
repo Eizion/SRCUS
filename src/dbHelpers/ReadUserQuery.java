@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import model.ContactInfo;
+import model.Title;
 import model.User;
 import model.Year;
 
@@ -21,7 +22,7 @@ public class ReadUserQuery {
 	private int studentID;
 	private int intr_ID;
 	private Year year = new Year();
-	private String title;
+	private Title title = new Title();
 	
 	public ReadUserQuery() {
 		connection = MyDbConnection.getConnection();
@@ -166,11 +167,27 @@ public class ReadUserQuery {
 	}
 	
 	public void viewInstructor(int InstrID) {
-		String query = "select InstrID, Title, AddressLine1, AddressLine2, City, State, Zipcode, Organization, Phone from student where InstrID=?;";
+		String query = "select Title, AddressLine1, AddressLine2, City, State, Zipcode, Organization, Phone from instructor where InstrID=?;";
+		
 		try {
 			PreparedStatement ps = this.connection.prepareStatement(query);
+			
 			ps.setInt(1, InstrID);
+			
 			this.results = ps.executeQuery();
+			
+			this.results.next();
+			
+			title.setTitle(this.results.getString("title"));
+			contactInfo.setAddressLine1(this.results.getString("AddressLine1"));
+			contactInfo.setAddressLine2(this.results.getString("AddressLine2"));
+			contactInfo.setCity(this.results.getString("City"));
+			contactInfo.setState(this.results.getString("State"));
+			contactInfo.setZipcode(this.results.getInt("Zipcode"));
+			contactInfo.setOrganization(this.results.getString("Organization"));
+			contactInfo.setPhone(this.results.getString("Phone"));
+			
+			
 		} catch (SQLException e) {					
 		// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -214,6 +231,10 @@ public class ReadUserQuery {
 	
 	public Year getYear(){
 		return this.year;
+	}
+	
+	public Title getTitle(){
+		return this.title;
 	}
 	
 	
