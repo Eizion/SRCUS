@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import dbHelpers.CheckUserQuery;
 import dbHelpers.RegisterQuery;
+import dbHelpers.UpdateCredsQuery;
 import model.ContactInfo;
+import model.SecurityAnswer;
 import model.User;
 import utilities.Encryption;
 
@@ -58,6 +60,8 @@ public class RegisterServlet extends HttpServlet {
 		String phone = request.getParameter("phone");
 		String title = request.getParameter("title");
 		int year = Integer.parseInt(request.getParameter("year"));
+		int s_question = Integer.parseInt(request.getParameter("sq"));
+		String s_answer = request.getParameter("answer");
 		
 		//System.out.println("this" + address2);
 		
@@ -104,6 +108,15 @@ public class RegisterServlet extends HttpServlet {
 			} else {
 				rq.addToInstructor(newUser, newContact, title, userID);
 			}
+			
+			SecurityAnswer sa = new SecurityAnswer();
+			
+			sa.setSq_id(s_question);
+			sa.setUser_id(userID);
+			sa.setAnswer(s_answer);
+			
+			UpdateCredsQuery ucq = new UpdateCredsQuery ();
+			ucq.addAnswers(sa);
 			
 			String message = "You have successfully created the user.";
 			request.setAttribute("message", message);

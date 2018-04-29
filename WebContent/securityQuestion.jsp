@@ -40,7 +40,7 @@
 
 			<div class="form-group">
 				<label>Question</label>
-				<select class="form-control" style="width:100%;" name="sq">
+				<select class="form-control" style="width:100%;" name="sq" required>
 					<option value="">-----</option>
 					<option value="1">In what city were you born?</option>
 					<option value="2">What is the name of your first pet?</option>

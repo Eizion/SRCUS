@@ -183,6 +183,22 @@
      					</td>
      				</tr>
      				<tr>
+     					<td><label>Security Question</label></td>
+						<td><select name="sq" required>
+								<option value="">-----</option>
+								<option value="1">In what city were you born?</option>
+								<option value="2">What is the name of your first pet?</option>
+								<option value="3">What is your dream vacation destination?</option>
+								<option value="4">What was the make of your first car?</option>
+								<option value="5">What was the name of your first boyfriend or girlfriend?</option>
+							</select> 
+						</td>
+     				</tr>
+     				<tr>
+     					<td><label>Answer(Case-Sensitive)</label></td>
+				 		<td><input name="answer" required /></td>
+     				</tr>
+     				<tr>
      					<td><a href="index.jsp">back</a></td>
      					<td><input class="btn btn-primary" style="padding-top: 0px;padding-bottom:  0px; float:right;" type="submit" name="submit" value="Register"></td>
      					
