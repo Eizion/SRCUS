@@ -97,7 +97,7 @@ public class ReadUserQuery {
 					table += "</td>";
 				} */
 				table += "<td>";
-				table += "<a href=updateUser?user_id=" + user.getId() + ">update</a>";
+				table += "<a href=updateUser?user_id=" + user.getId() + ">Update</a> <a href=newPassword?user_id=" + user.getId() + ">Change Password</a>";
 				table += "</td>";
 				table += "</tr>";
 				
