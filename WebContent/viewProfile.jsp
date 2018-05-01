@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import = "model.User" %>
+<%@page import = "model.ContactInfo" %>
+<%@page import = "model.Year" %>
+<%@page import = "model.Title" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%User profile = (User) request.getAttribute("profile"); %>
+<%ContactInfo profileContact = (ContactInfo) request.getAttribute("profileContact"); %>
+<%Year year = (Year) request.getAttribute("year"); %>
+<%Title title = (Title) request.getAttribute("title"); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -32,38 +41,57 @@
 
 	${errorMessage}
 		<div style="width: 20%;height: 20%;position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;">
-	<div style="background-color: white; padding: 25px; box-shadow: 3px 3px 3px #888888;border-radius: 0px;">
-<!-- Table to show user profile information -->
+		<div style="background-color: white; padding: 25px; box-shadow: 3px 3px 3px #888888;border-radius: 0px;">
+			
+		<label>First Name:</label>
+		<div><%= profile.getfName() %></div>
+		<br>
+		<label>Last Name:</label>
+		<div><%= profile.getlName() %></div>
+		<br>
+		<label>Email:</label>
+		<div><%= profile.getEmail() %></div>
+		<br>
+		<c:if test = "${user.role == 2}">
+			<label>Year:</label>
+			<div><%= year.getYear() %></div>
+			<br>
+		</c:if>
+		<c:if test = "${user.role == 3}">
+			<label>Title:</label>
+			<div><%= title.getTitle() %></div>
+			<br>
+		</c:if>
+		<c:if test = "${(user.role == 2) || (user.role == 3)}">
+			<label>Address Line 1:</label>
+			<div><%= profileContact.getAddressLine1() %></div>
+			<br>
+			<label>Address Line 2:</label>
+			<div><%= profileContact.getAddressLine2() %></div>
+			<br>
+			<label>City:</label>
+			<div><%= profileContact.getCity() %></div>
+			<br>
+			<label>State:</label>
+			<div><%= profileContact.getState() %></div>
+			<br>
+			<label>Zip:</label>
+			<div><%= profileContact.getZipcode() %></div>
+			<br>
+			<label>Phone:</label>
+			<div><%= profileContact.getPhone() %></div>
+			<br>
+			<label>Organization:</label>
+			<div><%= profileContact.getOrganization() %></div>
+			<br>
+		</c:if>
+		
+		<form action="editProfile" method="post">
+			<input type=submit name=submit value="Edit" />
+		</form>
 
-
-
-
-<!-- Table to show user profile information -->
-<table>
-     				<tr>
-	    				<td><label>Email:</label></td>
-	    				
-	    				<!--  Getting the user data via the "user" object -->
-     					<td>${user.email}</td>
-     				</tr>
-     				<tr>
-     					<td><label>First Name:</label></td>
-     					<td>${user.fName}</td>
-     				</tr>
-     				<tr>
-	    				<td><label>Last Name:</label></td>
-     					<td>${user.lName}</td>
-     				</tr>
-     				<tr>
-	    				<td><label>Role:</label></td>
-     					<td>${user.role}</td>
-     				</tr>
-     				<tr>
-     				
-     					<td><a href="editProfile.jsp">Edit Profile</a></td>
-     					<td><a href="settings.jsp">Back</a></td>
-     				</tr>
-     			</table>
-                   
+     			
+     	</div>
+		</div>
 </body>
 </html>

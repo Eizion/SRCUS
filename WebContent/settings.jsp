@@ -40,7 +40,7 @@
 	
 				<div class="homepage-icons"><a class="homepage-links" href="changePassword.jsp">Change Password</a></div>
 				
-				<div class="homepage-icons"><a class="homepage-links" href="viewProfile.jsp">View Profile</a></div>
+				<div class="homepage-icons"><a class="homepage-links" href="ViewProfile">View Profile</a></div>
 
 </div>
 </div>

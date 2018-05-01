@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import = "model.User" %>
+<%@page import = "model.ContactInfo" %>
+<%@page import = "model.Year" %>
+<%@page import = "model.Title" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%User profile = (User) request.getAttribute("profile"); %>
+<%ContactInfo profileContact = (ContactInfo) request.getAttribute("profileContact"); %>
+<%Year year = (Year) request.getAttribute("year"); %>
+<%Title title = (Title) request.getAttribute("title"); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -32,36 +41,57 @@
 
 	${errorMessage}
 		<div style="width: 20%;height: 20%;position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;">
-	<div style="background-color: white; padding: 25px; box-shadow: 3px 3px 3px #888888;border-radius: 0px;">
+		<div style="background-color: white; padding: 25px; box-shadow: 3px 3px 3px #888888;border-radius: 0px;">
 
-<!-- Table to edit user profile information -->
-
-
-
-		<form name="updateProfile" action="update" method="post">
-				<table>
-     				<tr>
-	    				<td><label>Email:</label></td>
-	    				
-	    				<!-- Text field with the origional user data in it where the user can update if need be-->
-     					<td><input type="text" name="email" value="${user.email}" required/></td>
-     				</tr>
-     				<tr>
-     					<td><label>First Name:</label></td>
-     					<td><input type="text" name="fname" value="${user.fName}" required/></td>
-     				</tr>
-     				<tr>
-	    				<td><label>Last Name:</label></td>
-     					<td><input type="text" name="lname" value="${user.lName}" required/></td>
-     				</tr>
-     				<tr>
-     				
-     					<td><input type="submit" name="submit" value="Update"></td>
-     					<td><a href="viewProfile.jsp">Back</a></td>
-     				</tr>
-     			</table>
-     			${errorMessage}
-     			
-     		</form>
+		<form name="updateProfile" action="updateProfile" method="post">
+			<label>First Name:</label>
+			<input type=text name=fName value="<%= profile.getfName() %>" require/>
+			<br>
+			<label>Last Name:</label>
+			<input type=text name=lName value="<%= profile.getlName() %>" require/>
+			<br>
+			<label>Email:</label>
+			<input type=text name=email value="<%= profile.getEmail() %>" require/>
+			<br>
+			<c:if test = "${user.role == 2}">
+				<label>Year:</label>
+				<input type=text name=year value="<%= year.getYear() %>" require/>
+				<br>
+			</c:if>
+			<c:if test = "${user.role == 3}">
+				<label>Title:</label>
+				<input type=text name=title value="<%= title.getTitle() %>" require/>
+				<br>
+			</c:if>
+			<c:if test = "${(user.role == 2) || (user.role == 3)}">
+				<label>Address Line 1:</label>
+				<input type=text name=addressLine1 value="<%= profileContact.getAddressLine1() %>" require/>
+				<br>
+				<label>Address Line 2:</label>
+				<input type=text name=addressLine2 value="<%= profileContact.getAddressLine2() %>" require/>
+				<br>
+				<label>City:</label>
+				<input type=text name=city value="<%= profileContact.getCity() %>" require/>
+				<br>
+				<label>State:</label>
+				<input type=text name=state value="<%= profileContact.getState() %>" require/>
+				<br>
+				<label>Zip:</label>
+				<input type=text name=zipcode value="<%= profileContact.getZipcode() %>" require/>
+				<br>
+				<label>Phone:</label>
+				<input type=text name=phone value="<%= profileContact.getPhone() %>" require/>
+				<br>
+				<label>Organization:</label>
+				<input type=text name=organization value="<%= profileContact.getOrganization() %>" require/>
+				<br>
+			</c:if>
+			
+			<input type=submit name=submit value="Submit" />
+			
+     	</form>
+     	
+     	</div>
+     	</div>
 </body>
 </html>

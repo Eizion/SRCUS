@@ -17,7 +17,7 @@ import utilities.Encryption;
 /**
  * Servlet implementation class UpdatePasswordServlet
  */
-@WebServlet({ "/UpdateServlet", "/updateProfile" })
+@WebServlet("/UpdateServlet")
 public class UpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String url;
