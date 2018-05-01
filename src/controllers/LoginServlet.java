@@ -84,7 +84,7 @@ public class LoginServlet extends HttpServlet {
 			boolean emptyAnswer;
 			CheckAnswerQuery caq = new CheckAnswerQuery();
 			emptyAnswer = caq.checkEmptyAnswer(email);
-			System.out.println("Empty security answer:" + emptyAnswer);
+			//System.out.println("Empty security answer:" + emptyAnswer);
 			
 			//check to see if user exists
 			if (user != null && emptyAnswer == false){
