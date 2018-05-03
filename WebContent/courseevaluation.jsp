@@ -41,9 +41,7 @@
 	<a class="btn btn-link" href="CreateEvaluation.jsp">Create Evaluations</a><br>
 	<a class="btn btn-link" href="editEvaluation.jsp">Edit Evaluation</a><br>
 	</c:if>
-	<c:if test = "${user.role == 2 }">
 	<a class="btn btn-link" href="selectEvaluation.jsp">Load Evaluation</a><br>
-	</c:if>
 	<c:if test = "${(user.role == 1) || (user.role == 3)}">
 	<a class="btn btn-link" href="generateReport.jsp">Generate Reports</a><br>
 	</c:if>
