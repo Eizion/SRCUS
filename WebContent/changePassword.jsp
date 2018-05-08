@@ -10,7 +10,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Update Password</title>
+<title>Change Password</title>
 </head>
 <body style="background-color: dodgerblue;">
 <div class="header">
@@ -33,25 +33,30 @@
 	</div>
 
 	${errorMessage}
-		<div style="width: 20%;height: 20%;position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;">
-	<div style="background-color: white; padding: 25px; box-shadow: 3px 3px 3px #888888;border-radius: 0px;">
+		<div class="center-login">
+	<div style="
+    background-color: white;
+    padding: 40px;
+    box-shadow: 3px 3px 3px #888888;
+    border-radius: 0px;
+" >
 	<form name="updatePassword" action="updatePassword" method="post">
 		<table>
 			<tr>
      			<td><label>Old Password:</label></td>
-     			<td><input type="password" name="oldPassword" required/></td>
+     			<td><input class="form-control" type="password" name="oldPassword" required/></td>
      		</tr>
      		<tr>
      			<td><label>New Password:</label></td>
-     			<td><input type="password" name="newPassword1" required/></td>
+     			<td><input class="form-control" type="password" name="newPassword1" required/></td>
      		</tr>
      		<tr>
      			<td><label>Retype Password:</label></td>
-     			<td><input type="password" name="newPassword2" required/></td>
+     			<td><input class="form-control" type="password" name="newPassword2" required/></td>
      		</tr>
      		<tr>
      			<td ><a href="settings.jsp">back</a></td>
-     			<td><span style="float:right;"><input type="submit" name="submit" value="Submit"></span></td>
+     			<td><span style="float:right;"><input class="btn btn-primary" type="submit" name="submit" value="Submit"></span></td>
      			
    			</tr>
 		</table>

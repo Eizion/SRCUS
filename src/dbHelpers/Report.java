@@ -140,7 +140,7 @@ public class Report {
 		String message="";
 		Question current = new Question();
 		message += "<p>";
-		message += "<table border=1>";
+		message += "<table class='table table-striped'>";
 		ArrayList<String> choices = new ArrayList<String>();
 			for(int i= 0; i < container.length; i++) {
 				current = container[i];

@@ -32,10 +32,12 @@
 				
 					<div style="padding-bottom: 10px;"><span><label>Password</label></td> <input class="form-control" type="password" name="password" required /></span></div>
 				
-				
+					<div class="row">
+					
+					<a class="side-by-side" href="registerUser.jsp">Register</a>
+					<a class="side-by-side" href="forgotpassword.jsp">Forgot Password</a>
 					<input style="padding-top: 0px;padding-bottom:  0px;" class="btn btn-primary " type="submit" value="Login">
-					<a href="registerUser.jsp">Register</a>
-					<a style="margin-left: 57px;" href="forgotpassword.jsp">Forgot Password</a>
+					</div>
 				${errorMessage}
 		</form>
 		</div>

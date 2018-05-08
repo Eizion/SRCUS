@@ -3,31 +3,33 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link type="text/css" rel="stylesheet" href="resources/css/bootstrap.min.css" >
+<link type="text/css" rel="stylesheet" href="resources/css/style.css" >
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Reset Password</title>
 </head>
 <body style="background-color: dodgerblue;">
-
+<h1>Southeast Regional Credit Union Schools Web Portal</h1>
+<h2>Reset Password</h2>
 	${errorMessage}
-	<div style="width: 20%;height: 20%;position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;">
-	<div style="background-color: white; padding: 25px; box-shadow: 3px 3px 3px #888888;border-radius: 0px;">
+	<div class="center-login">
+	<div style="background-color: white; padding: 45px; box-shadow: 3px 3px 3px #888888;border-radius: 0px;">
 	<p>Please enter a new password</p>
 	
 	<form name="updatePassword" action="resetPassword" method="post">
-		<table>
-     		<tr>
-     			<td><label>New Password:</label></td>
-     			<td><input type="password" name="newPassword1" required/></td>
-     		</tr>
-     		<tr>
-     			<td><label>Retype Password:</label></td>
-     			<td><input type="password" name="newPassword2" required/></td>
-     		</tr>
-     		<tr>
-     			<td><input class="btn btn-primary" type="submit" name="submit" value="Submit"></td>
-   			</tr>
-		</table>
+		
+     		
+     			<label>New Password:</label></td>
+     			<input class="form-control" type="password" name="newPassword1" required/>
+     		
+     		
+     			<label>Retype Password:</label></td>
+     			<input class="form-control" type="password" name="newPassword2" required/>
+     		
+     			<input style="float:right;" class="btn btn-primary" type="submit" name="submit" value="Submit">
+   			
+		
 	</form>
 </div>
 </div>

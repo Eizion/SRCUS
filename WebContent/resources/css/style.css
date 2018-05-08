@@ -100,3 +100,15 @@ height: auto;
 	width: auto;
     margin-right: 10px;
 }
+.side-by-side-login-buttons{
+	display:initial;
+	width: auto;
+    margin-right: 35px;
+}
+@media only screen and (max-width: 1024px) {
+ .side-by-side-login-buttons{
+	display:initial;
+	width: auto;
+    margin-right: 35px;
+}
+}
