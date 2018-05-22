@@ -10,5 +10,5 @@ _Group_
 * Britney Lovett
 * Joe Vo
 
-Database Dump Updated May-13-18
-https://www.dropbox.com/s/ydz2607wjow2at7/srcus_master.sql?dl=0
+Database Dump Required
+https://www.dropbox.com/s/t8x3pb8yfbwyi71/SRCUS%20Portal%20System.zip?dl=0
